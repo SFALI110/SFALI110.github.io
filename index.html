@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Syed Faizan Ali · Senior IT Project Manager</title>
+<meta name="description" content="Syed Faizan Ali — Senior IT Project Manager in Karachi. Digital transformation, PMO governance and agile delivery across insurance, IT services and manufacturing.">
+<meta property="og:title" content="Syed Faizan Ali · Senior IT Project Manager">
+<meta property="og:description" content="Digital transformation, PMO governance and agile delivery across insurance, IT services and manufacturing. Karachi, Pakistan.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: single column; hero carries a real career Gantt chart (Jun 2013 – today), then sections on a shared rhythm */
+:root{
+  --bg:#F4F6F8; --surface:#FFFFFF; --ink:#132033; --muted:#566377; --line:#D9DFE7;
+  --accent:#0E7C66; --accent-soft:#DCEFEA; --mark:#C98200;
+  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body:"IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Consolas, monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E151F; --surface:#151F2C; --ink:#E6ECF3; --muted:#9AA7B8;
+  --line:#263344; --accent:#3CC3A2; --accent-soft:#143A33; --mark:#F2B33D; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E151F; --surface:#151F2C; --ink:#E6ECF3; --muted:#9AA7B8;
+  --line:#263344; --accent:#3CC3A2; --accent-soft:#143A33; --mark:#F2B33D; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.65 var(--body);margin:0;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+img{max-width:100%}
+.wrap{max-width:1040px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+
+nav{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:22px;flex-wrap:wrap}
+.brand{font:700 18px/1 var(--display);letter-spacing:-.01em;color:var(--ink);text-decoration:none}
+.brand span{color:var(--accent)}
+.navlinks{display:flex;gap:20px;flex-wrap:wrap}
+.navlinks a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500}
+.navlinks a:hover{color:var(--ink)}
+
+.hero{padding-block:36px 28px}
+.eyebrow{font:500 12px/1.4 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+h1{font:800 clamp(40px,7.5vw,78px)/1 var(--display);letter-spacing:-.035em;margin:14px 0 10px;text-wrap:balance}
+.role-line{font:600 clamp(16px,2.2vw,19px)/1.4 var(--display);margin:0 0 16px}
+.role-line span{color:var(--muted);font-weight:500}
+.lede{font-size:clamp(16px,2vw,18.5px);color:var(--muted);max-width:62ch;margin:0}
+.cta{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
+.btn{display:inline-block;padding:11px 18px;border-radius:8px;font-weight:600;font-size:15px;text-decoration:none;border:1px solid var(--accent)}
+.btn.primary{background:var(--accent);color:var(--bg)}
+.btn.ghost{color:var(--accent)}
+
+.gantt{margin-top:40px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px 22px 18px}
+.gantt-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.gantt-head h2{font:700 15px/1.2 var(--display);margin:0}
+.legend{display:flex;gap:16px;font:400 12px/1 var(--mono);color:var(--muted);flex-wrap:wrap}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.gscroll{overflow-x:auto}
+.gbody{min-width:640px;position:relative}
+.grow{display:grid;grid-template-columns:180px 1fr;align-items:center;min-height:40px;border-top:1px solid var(--line)}
+.grow:first-child{border-top:0}
+.glabel{font-size:13px;font-weight:600;line-height:1.3;padding-right:12px}
+.glabel small{display:block;font:400 11px/1.3 var(--mono);color:var(--muted)}
+.track{position:relative;height:40px;background-image:linear-gradient(to right,var(--line) 1px,transparent 1px);background-size:calc(100%/14) 100%}
+.bar{position:absolute;top:11px;height:18px;border-radius:4px;background:var(--accent)}
+.bar.past{background:var(--muted);opacity:.55}
+.bar small{position:absolute;left:8px;top:2px;font:500 10.5px/14px var(--mono);color:var(--bg);white-space:nowrap}
+.milestone{position:absolute;top:13px;width:14px;height:14px;background:var(--mark);transform:translateX(-50%) rotate(45deg);border-radius:2px}
+.axis{display:grid;grid-template-columns:180px 1fr;margin-top:6px}
+.years{display:grid;grid-template-columns:repeat(14,1fr);font:400 11px/1 var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.today{position:absolute;top:0;bottom:0;width:0;border-left:2px dashed var(--mark)}
+.today span{position:absolute;top:-2px;left:6px;font:500 10px/1 var(--mono);color:var(--mark);white-space:nowrap}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);margin-top:28px;border-block:1px solid var(--line)}
+.stat{padding:18px 16px 18px 0}
+.stat b{display:block;font:700 30px/1 var(--display);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.stat span{font-size:13px;color:var(--muted)}
+@media (max-width:640px){.stats{grid-template-columns:repeat(2,1fr)}}
+
+section{padding-block:56px 8px}
+.sec-head{display:flex;gap:14px;align-items:baseline;margin-bottom:24px;flex-wrap:wrap}
+.sec-head h2{font:700 clamp(26px,4vw,36px)/1.1 var(--display);letter-spacing:-.02em;margin:0;text-wrap:balance}
+
+.services{display:grid;grid-template-columns:repeat(2,1fr);gap:28px 40px}
+.svc h3{font:700 18px/1.25 var(--display);margin:0 0 6px}
+.svc p{margin:0;color:var(--muted);font-size:15px;max-width:52ch}
+.svc .tag{font:500 11px/1 var(--mono);color:var(--accent);letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:10px}
+@media (max-width:700px){.services{grid-template-columns:1fr}}
+
+.work{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.case{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:22px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.case .where{font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.case h3{font:700 19px/1.25 var(--display);margin:0}
+.case p{margin:0;color:var(--muted);font-size:15px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:6px}
+.chip{font:500 11.5px/1 var(--mono);padding:6px 8px;border-radius:5px;background:var(--accent-soft);color:var(--ink)}
+@media (max-width:760px){.work{grid-template-columns:1fr}}
+
+.allprojects{margin-top:22px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.allprojects summary{cursor:pointer;padding:16px 22px;font:600 15px/1.3 var(--display);list-style:none;display:flex;justify-content:space-between;gap:12px}
+.allprojects summary::-webkit-details-marker{display:none}
+.allprojects summary::after{content:"+";font:500 18px/1 var(--mono);color:var(--accent)}
+.allprojects[open] summary::after{content:"−"}
+.plist{display:grid;grid-template-columns:repeat(2,1fr);gap:8px 40px;padding:0 22px 22px}
+.plist h4{font:600 12px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:14px 0 8px}
+.plist ul{margin:0;padding-left:18px;color:var(--muted);font-size:14.5px}
+.plist li{margin-bottom:3px}
+@media (max-width:700px){.plist{grid-template-columns:1fr}}
+
+.roles{display:flex;flex-direction:column}
+.role{display:grid;grid-template-columns:160px 1fr;gap:20px;padding-block:22px;border-top:1px solid var(--line)}
+.role:last-child{border-bottom:1px solid var(--line)}
+.when{font:500 13px/1.5 var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.role h3{font:700 19px/1.25 var(--display);margin:0}
+.role .org{color:var(--accent);font-weight:600;font-size:15px}
+.role ul{margin:10px 0 0;padding-left:18px;color:var(--muted);font-size:15px;max-width:70ch}
+.role li{margin-bottom:4px}
+@media (max-width:640px){.role{grid-template-columns:1fr;gap:6px}}
+
+.split{display:grid;grid-template-columns:1.4fr 1fr;gap:40px}
+@media (max-width:760px){.split{grid-template-columns:1fr}}
+.kit h3,.edu h3{font:600 12px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:22px 0 10px}
+.kit .chips{margin-top:0;padding-top:0}
+.edu-item{padding-block:14px;border-top:1px solid var(--line)}
+.edu-item b{font:700 18px/1.3 var(--display);display:block}
+.edu-item span{color:var(--muted);font-size:14px}
+
+.contact{margin-block:64px 40px;background:var(--ink);color:var(--bg);border-radius:16px;padding:clamp(24px,5vw,48px)}
+.contact h2{font:800 clamp(28px,5vw,44px)/1.05 var(--display);letter-spacing:-.03em;margin:0 0 10px;text-wrap:balance}
+.contact p{margin:0 0 24px;opacity:.8;max-width:56ch}
+.clist{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media (max-width:760px){.clist{grid-template-columns:1fr}}
+.citem{border:1px solid color-mix(in srgb,var(--bg) 25%,transparent);border-radius:10px;padding:14px 16px;min-width:0}
+.citem small{display:block;font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;opacity:.7;margin-bottom:8px}
+.citem .val{font-weight:600;word-break:break-all;user-select:all}
+.citem a{color:var(--bg)}
+.copy{margin-top:10px;background:transparent;color:var(--bg);border:1px solid color-mix(in srgb,var(--bg) 40%,transparent);border-radius:6px;font:500 12px/1 var(--mono);padding:6px 10px;cursor:pointer}
+footer{padding-block:0 40px;color:var(--muted);font:400 12px/1.5 var(--mono)}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <nav>
+    <a class="brand" href="#top">sfali<span>.pm</span></a>
+    <div class="navlinks">
+      <a href="#services">Expertise</a>
+      <a href="#work">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#toolkit">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="eyebrow">Karachi, Pakistan · Open to roles &amp; consulting</div>
+    <h1>Syed Faizan Ali</h1>
+    <p class="role-line">Senior IT Project Manager <span>· Digital Transformation · PMO · Agile Delivery</span></p>
+    <p class="lede">11+ years delivering digital transformation, AI-enabled, enterprise, web and mobile projects across insurance, IT services and manufacturing. I lead cross-functional teams, manage stakeholders, vendors and budgets, and bring governance that keeps projects inside scope, schedule and budget.</p>
+    <div class="cta">
+      <a class="btn primary" href="#contact">Get in touch</a>
+      <a class="btn ghost" href="#work">See key projects</a>
+    </div>
+
+    <div class="gantt" aria-label="Career timeline chart, June 2013 to today">
+      <div class="gantt-head">
+        <h2>Career roadmap</h2>
+        <div class="legend"><span><i style="background:var(--accent)"></i>Current role</span><span><i style="background:var(--muted);opacity:.55"></i>Completed</span><span><i style="background:var(--mark);transform:rotate(45deg)"></i>Degree completed</span></div>
+      </div>
+      <div class="gscroll">
+        <div class="gbody">
+          <div class="grow">
+            <div class="glabel">EFU Life Assurance<small>Project Manager</small></div>
+            <div class="track"><div class="bar" style="left:calc(10.92*100%/14);width:calc(2.9*100%/14)"><small>Dec 2023 →</small></div><div class="today" style="left:calc(13.82*100%/14)"><span>now</span></div></div>
+          </div>
+          <div class="grow">
+            <div class="glabel">Galaxy Science &amp; Tech<small>Project Coordinator</small></div>
+            <div class="track"><div class="bar past" style="left:calc(10.42*100%/14);width:calc(.5*100%/14)"></div></div>
+          </div>
+          <div class="grow">
+            <div class="glabel">Merchant Holdings<small>Project Manager</small></div>
+            <div class="track"><div class="bar past" style="left:calc(9*100%/14);width:calc(1.42*100%/14)"></div></div>
+          </div>
+          <div class="grow">
+            <div class="glabel">Lucky Cement<small>Sr. Assistant Manager IT</small></div>
+            <div class="track"><div class="bar past" style="left:calc(.42*100%/14);width:calc(8.58*100%/14)"><small>Jun 2013 – Jan 2022 · 8.5 yrs</small></div></div>
+          </div>
+          <div class="grow">
+            <div class="glabel">Education<small>BS CS · MPM</small></div>
+            <div class="track"><div class="milestone" style="left:calc(.35*100%/14)" title="BS Computer Science, UIT, 2013"></div><div class="milestone" style="left:calc(9.5*100%/14)" title="Master of Project Management, SZABIST, 2022"></div></div>
+          </div>
+        </div>
+        <div class="axis gbody"><div></div><div class="years"><span>2013</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span></div></div>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><b>11+</b><span>years in IT delivery</span></div>
+      <div class="stat"><b>25–30</b><span>team members led across projects</span></div>
+      <div class="stat"><b>28</b><span>key projects across 4 organisations</span></div>
+      <div class="stat"><b>3</b><span>sectors: insurance, IT services, manufacturing</span></div>
+    </div>
+  </header>
+
+  <section id="services">
+    <div class="sec-head"><span class="eyebrow">Expertise</span><h2>What I bring to a project</h2></div>
+    <div class="services">
+      <div class="svc"><span class="tag">Transformation</span><h3>Digital transformation delivery</h3><p>Turning paper-heavy processes into digital workflows: claims, onboarding, document processing and hiring, plus the portals and apps around them.</p></div>
+      <div class="svc"><span class="tag">Governance</span><h3>PMO, governance &amp; reporting</h3><p>Charters, BRDs, plans, risk registers and status reporting that give management a clear view, plus coordination of internal and external IT audits.</p></div>
+      <div class="svc"><span class="tag">Agile</span><h3>Agile / Scrum delivery</h3><p>Sprint planning, stand-ups, reviews and retrospectives, with QA, UAT, API testing and production releases managed end to end.</p></div>
+      <div class="svc"><span class="tag">Stakeholders</span><h3>Stakeholder &amp; vendor management</h3><p>Keeping business owners, technical teams and vendors aligned, from requirement gathering through contract and budget negotiation.</p></div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="sec-head"><span class="eyebrow">Key projects</span><h2>Selected delivery</h2></div>
+    <div class="work">
+      <article class="case">
+        <span class="where">EFU Life Assurance</span>
+        <h3>Digitalization programme</h3>
+        <p>Led a series of digitalization projects covering medical claims, customer onboarding and verification, document processing and the HR hiring process, for faster turnaround and less manual work.</p>
+        <div class="chips"><span class="chip">Digital transformation</span><span class="chip">Process redesign</span><span class="chip">Insurance</span></div>
+      </article>
+      <article class="case">
+        <span class="where">EFU Life Assurance</span>
+        <h3>EFU WIN mobile app &amp; dashboard</h3>
+        <p>Led delivery of a mobile app and dashboard for digital health engagement, linking customer wellness activity to the insurance relationship.</p>
+        <div class="chips"><span class="chip">Mobile</span><span class="chip">Health-tech</span><span class="chip">Dashboard</span></div>
+      </article>
+      <article class="case">
+        <span class="where">EFU Life Assurance</span>
+        <h3>Customer-facing platforms revamp</h3>
+        <p>Corporate website revamp, a digital web portal for customer services, a mobile apps revamp, and a conservation portal for Banca and sales agents.</p>
+        <div class="chips"><span class="chip">Web</span><span class="chip">Mobile</span><span class="chip">UI/UX</span><span class="chip">Portals</span></div>
+      </article>
+      <article class="case">
+        <span class="where">Merchant Holdings</span>
+        <h3>Lytics, an AI-powered media app</h3>
+        <p>Led delivery of a mobile and web application that uses keyword extraction to find relevant content in news broadcasts and talk shows.</p>
+        <div class="chips"><span class="chip">AI-enabled</span><span class="chip">Mobile + web</span><span class="chip">Media</span></div>
+      </article>
+      <article class="case">
+        <span class="where">EFU Life Assurance</span>
+        <h3>Jira Service Management rollout</h3>
+        <p>Implemented Jira Service Management for IT support and service requests, and administer Jira for sprint planning and delivery tracking across teams.</p>
+        <div class="chips"><span class="chip">JSM</span><span class="chip">ITSM</span><span class="chip">Tooling</span></div>
+      </article>
+      <article class="case">
+        <span class="where">Lucky Cement</span>
+        <h3>Data center relocation</h3>
+        <p>Oversaw data center relocation and server deployment, alongside the Avaya IP phone implementation and EMS deployment.</p>
+        <div class="chips"><span class="chip">Infrastructure</span><span class="chip">IT operations</span><span class="chip">Vendors</span></div>
+      </article>
+    </div>
+
+    <details class="allprojects">
+      <summary>Full project list, by organisation</summary>
+      <div class="plist">
+        <div>
+          <h4>EFU Life Assurance</h4>
+          <ul><li>EFU WIN Mobile App &amp; Dashboard</li><li>Corporate Website Revamp</li><li>Digital Web Portal for customer services</li><li>EFU Mobile Apps Revamp</li><li>Conservation Portal for Banca &amp; Sales Agents</li><li>Digitalization of Document Processing</li><li>Digitalization of Medical Claims</li><li>Digitalization of HR Hiring Process</li><li>Digitalization of Customer Onboarding &amp; Verification</li><li>Core Insurance ERP development</li><li>Jira Service Management implementation</li></ul>
+          <h4>Galaxy Science &amp; Technology</h4>
+          <ul><li>Senate Digitization Solution</li><li>Core Banking Solution</li><li>Educational Management Solution</li></ul>
+        </div>
+        <div>
+          <h4>Merchant Holdings</h4>
+          <ul><li>Mobile apps: Lytics (AI-based), PTV Flix</li><li>Web application development</li><li>E-commerce website development</li><li>Corporate &amp; business websites, microsites</li><li>Website SEO &amp; performance optimization</li><li>Rich media advertising campaigns</li></ul>
+          <h4>Lucky Cement</h4>
+          <ul><li>Finance Management System</li><li>IT Support Ticketing System</li><li>Inventory &amp; Gate Pass Management</li><li>Data Center Relocation &amp; Server Deployment</li><li>Server, datacenter and support management</li></ul>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <section id="experience">
+    <div class="sec-head"><span class="eyebrow">Experience</span><h2>Eleven years, four organisations</h2></div>
+    <div class="roles">
+      <div class="role">
+        <div class="when">Dec 2023 – Present</div>
+        <div><h3>Project Manager</h3><div class="org">EFU Life Assurance Ltd. · Karachi</div>
+          <ul>
+            <li>Lead end-to-end delivery of digital transformation and business application projects aligned with organisational objectives.</li>
+            <li>Manage scope, timelines, resources, budgets, risks and deliverables across multiple concurrent initiatives.</li>
+            <li>Own project documentation: BRDs, charters, plans, timelines and status reports.</li>
+            <li>Run Agile ceremonies and administer Jira for sprint planning, backlog management and progress tracking.</li>
+            <li>Manage UAT, API testing, defect tracking and issue resolution to protect delivery quality.</li>
+            <li>Support internal and external IT audits, coordinating documentation, responses and timely closure of findings.</li>
+          </ul></div>
+      </div>
+      <div class="role">
+        <div class="when">Jun 2023 – Dec 2023</div>
+        <div><h3>Project Coordinator</h3><div class="org">Galaxy Science &amp; Technology (Pvt.) Ltd. · Karachi</div>
+          <ul>
+            <li>Worked with the COO to build project plans and execution strategies.</li>
+            <li>Maintained plans, Gantt charts, status reports and change requests; tracked milestones and deliverables.</li>
+            <li>Coordinated communication between business stakeholders and technical teams.</li>
+          </ul></div>
+      </div>
+      <div class="role">
+        <div class="when">Jan 2022 – Jun 2023</div>
+        <div><h3>Project Manager</h3><div class="org">Merchant Holdings (Pvt.) Ltd. · Karachi</div>
+          <ul>
+            <li>Led cross-functional teams delivering web, mobile, digital transformation and AI projects.</li>
+            <li>Led delivery of an AI-powered app using keyword extraction on news and talk-show content.</li>
+            <li>Handled client engagement, requirement gathering, risk management and Agile ceremonies.</li>
+            <li>Oversaw QA, UAT and production deployment; administered Jira, Float and Confluence.</li>
+          </ul></div>
+      </div>
+      <div class="role">
+        <div class="when">Jun 2013 – Jan 2022</div>
+        <div><h3>Sr. Assistant Manager – IT</h3><div class="org">Lucky Cement Ltd. · Karachi</div>
+          <ul>
+            <li>Led IT support and data center operations, ensuring system stability and compliance.</li>
+            <li>Managed server administration, backups and IT infrastructure planning.</li>
+            <li>Negotiated vendor contracts and managed IT budgets and procurement.</li>
+            <li>Ran IT security awareness training and enforced information security policies.</li>
+          </ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="toolkit">
+    <div class="split">
+      <div class="kit">
+        <div class="sec-head"><span class="eyebrow">Skills</span><h2>Competencies &amp; tools</h2></div>
+        <h3>Core competencies</h3>
+        <div class="chips"><span class="chip">Project planning &amp; execution</span><span class="chip">AI-enabled project delivery</span><span class="chip">Digital transformation</span><span class="chip">PMO governance &amp; reporting</span><span class="chip">Agile &amp; Scrum</span><span class="chip">SDLC</span><span class="chip">Stakeholder &amp; vendor management</span><span class="chip">Business requirements analysis</span><span class="chip">Risk &amp; issue management</span><span class="chip">QA &amp; UAT management</span><span class="chip">IT governance &amp; compliance</span><span class="chip">Team leadership</span></div>
+        <h3>Project tools</h3>
+        <div class="chips"><span class="chip">Jira</span><span class="chip">Jira Service Management</span><span class="chip">Confluence</span><span class="chip">MS Project</span><span class="chip">Primavera P6</span><span class="chip">Float</span></div>
+        <h3>Design, development &amp; infrastructure</h3>
+        <div class="chips"><span class="chip">Figma</span><span class="chip">Postman</span><span class="chip">PHP / MySQL</span><span class="chip">WordPress</span><span class="chip">Server management</span><span class="chip">MS Windows</span><span class="chip">Adobe Photoshop</span><span class="chip">Illustrator</span></div>
+      </div>
+      <div class="edu">
+        <div class="sec-head"><span class="eyebrow">Education</span><h2>Degrees</h2></div>
+        <div class="edu-item"><b>Master of Project Management</b><span>SZABIST, Karachi · 2021 – 2022</span></div>
+        <div class="edu-item"><b>BS Computer Science</b><span>Usman Institute of Technology (UIT), Karachi · 2008 – 2013</span></div>
+        <h3>Highlights</h3>
+        <div class="edu-item"><span>Led teams of 25–30 members across multiple digital transformation projects, and delivered mission-critical applications, portals and automation systems on time and within budget.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <h2>Have a project that needs a steady hand?</h2>
+    <p>Open to senior project management and PMO roles, and to consulting on digital transformation and agile delivery.</p>
+    <div class="clist">
+      <div class="citem"><small>Email</small><div class="val" id="email">sfaali1987@gmail.com</div><button class="copy" data-copy="email" type="button">Copy</button></div>
+      <div class="citem"><small>LinkedIn</small><div class="val"><a href="https://www.linkedin.com/in/syedfaizanali1987/" target="_blank" rel="noopener">in/syedfaizanali1987</a></div></div>
+      <div class="citem"><small>Fiverr</small><div class="val"><a href="https://www.fiverr.com/sfali1987" target="_blank" rel="noopener">fiverr.com/sfali1987</a></div></div>
+    </div>
+  </section>
+
+  <footer>© 2026 Syed Faizan Ali · DHA, Karachi, Pakistan</footer>
+</div>
+
+<script>
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    var el=document.getElementById(b.dataset.copy), t=el.textContent.trim();
+    var done=function(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy'},1500)};
+    var sel=function(){var r=document.createRange();r.selectNodeContents(el);var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selected, press Ctrl+C'};
+    try{navigator.clipboard.writeText(t).then(done,sel)}catch(e){sel()}
+  });
+});
+</script>
+
+</body>
+</html>
