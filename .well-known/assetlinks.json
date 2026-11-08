@@ -1,0 +1,8 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "io.github.sfali110.hq",
+    "sha256_cert_fingerprints": ["21:25:8D:70:F6:D7:B6:71:59:AF:A0:E2:92:12:2B:F7:C7:1C:4F:C0:C0:86:7D:68:1B:B5:35:B5:37:62:2B:3C"]
+  }
+}]

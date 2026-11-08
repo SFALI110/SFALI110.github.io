@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent HQ</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#4f46e5">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<style>
+:root{
+  --bg:#f5f6f8;--panel:#fff;--panel2:#f0f2f5;--text:#16181d;--muted:#667085;--line:#e3e6eb;
+  --accent:#4f46e5;--accent-soft:#eef0ff;--ok:#12805c;--ok-soft:#e7f6ef;--warn:#b45309;--warn-soft:#fdf3e4;
+  --bad:#c0362c;--bad-soft:#fdecea;--radius:14px;--shadow:0 1px 2px rgba(16,24,40,.06),0 1px 3px rgba(16,24,40,.08);
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#0f1115;--panel:#171a21;--panel2:#1e222b;--text:#e8eaf0;--muted:#98a0b0;--line:#2a2f3a;
+  --accent:#8b85ff;--accent-soft:#25234a;--ok:#4ccf98;--ok-soft:#163327;--warn:#f0b35a;--warn-soft:#3a2c14;
+  --bad:#ff7a6e;--bad-soft:#3d1c1a;--shadow:none}}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text)}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:var(--accent)}
+header{position:sticky;top:0;z-index:5;background:var(--panel);border-bottom:1px solid var(--line)}
+.top{display:flex;align-items:center;gap:10px;padding:12px 16px;max-width:1200px;margin:auto}
+.logo{width:34px;height:34px;border-radius:10px;background:var(--accent);color:#fff;display:grid;place-items:center;font-weight:700}
+.co{flex:1;min-width:0}.co b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.co small{color:var(--muted)}
+.btn{border:1px solid var(--line);background:var(--panel);padding:7px 12px;border-radius:10px;cursor:pointer;white-space:nowrap}
+.btn:hover{background:var(--panel2)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.btn.bad{color:var(--bad)}
+.btn.sm{padding:4px 9px;font-size:13px;border-radius:8px}
+nav{display:flex;gap:4px;overflow-x:auto;padding:0 12px;max-width:1200px;margin:auto;scrollbar-width:none}
+nav a{padding:10px 12px;text-decoration:none;color:var(--muted);border-bottom:2px solid transparent;white-space:nowrap;font-weight:500}
+nav a.on{color:var(--text);border-color:var(--accent)}
+nav .count{background:var(--bad);color:#fff;border-radius:99px;font-size:11px;padding:1px 6px;margin-left:4px}
+main{max-width:1200px;margin:auto;padding:16px}
+.banner{background:var(--warn-soft);color:var(--warn);border-radius:10px;padding:10px 14px;margin-bottom:14px;font-size:14px}
+.banner.info{background:var(--accent-soft);color:var(--accent)}
+.grid{display:grid;gap:12px}
+.kpis{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:14px;box-shadow:var(--shadow)}
+.kpi small{color:var(--muted);display:block}.kpi b{font-size:26px;font-variant-numeric:tabular-nums}
+h2{font-size:17px;margin:22px 0 10px}
+h3{font-size:15px;margin:0 0 4px}
+.muted{color:var(--muted)}.small{font-size:13px}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.spacer{flex:1}
+.pill{display:inline-block;font-size:12px;padding:2px 8px;border-radius:99px;background:var(--panel2);color:var(--muted);white-space:nowrap}
+.pill.ok{background:var(--ok-soft);color:var(--ok)}.pill.warn{background:var(--warn-soft);color:var(--warn)}
+.pill.bad{background:var(--bad-soft);color:var(--bad)}.pill.acc{background:var(--accent-soft);color:var(--accent)}
+.bar{height:7px;border-radius:99px;background:var(--panel2);overflow:hidden;margin-top:6px}
+.bar i{display:block;height:100%;background:var(--accent);border-radius:99px}
+.bar i.hot{background:var(--warn)}.bar i.full{background:var(--bad)}
+/* board */
+.board{display:grid;grid-template-columns:repeat(5,minmax(240px,1fr));gap:12px;overflow-x:auto;padding-bottom:8px}
+.col{background:var(--panel2);border-radius:var(--radius);padding:10px;min-height:120px}
+.col h4{margin:2px 4px 10px;font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);display:flex;justify-content:space-between}
+.tcard{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px;margin-bottom:8px;cursor:pointer}
+.tcard:hover{border-color:var(--accent)}
+.tcard .id{font-size:12px;color:var(--muted)}
+.tcard .t{font-weight:600;margin:2px 0 6px}
+/* org */
+.org{overflow-x:auto;padding:10px 0 20px}
+.tree,.tree ul{list-style:none;margin:0;padding:0;display:flex;justify-content:center}
+.tree ul{padding-top:18px;position:relative}
+.tree li{position:relative;padding:18px 6px 0;text-align:center}
+.tree li::before,.tree li::after{content:"";position:absolute;top:0;right:50%;width:50%;height:18px;border-top:2px solid var(--line)}
+.tree li::after{right:auto;left:50%;border-left:2px solid var(--line)}
+.tree li:only-child::before,.tree li:only-child::after{display:none}
+.tree li:only-child{padding-top:0}
+.tree li:first-child::before,.tree li:last-child::after{border:0 none}
+.tree li:last-child::before{border-right:2px solid var(--line);border-radius:0 6px 0 0}
+.tree li:first-child::after{border-radius:6px 0 0 0}
+.tree ul ul::before,.tree>li>ul::before{content:"";position:absolute;top:0;left:50%;height:18px;border-left:2px solid var(--line)}
+.node{display:inline-block;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px;min-width:130px;box-shadow:var(--shadow)}
+.node .em{font-size:22px}.node b{display:block;font-size:14px}.node small{color:var(--muted);font-size:12px}
+.node.ceo{border-color:var(--accent);background:var(--accent-soft)}
+/* agents */
+.agents{grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.av{font-size:26px;width:44px;height:44px;border-radius:12px;background:var(--panel2);display:grid;place-items:center;flex:none}
+/* lists */
+.item{padding:12px 0;border-top:1px solid var(--line)}
+.item:first-child{border-top:0}
+.act{display:flex;gap:10px;padding:8px 0;border-top:1px solid var(--line);font-size:14px}
+.act:first-child{border-top:0}
+.act time{color:var(--muted);font-size:12px;min-width:74px;font-variant-numeric:tabular-nums}
+/* modal */
+.modal{position:fixed;inset:0;background:rgba(10,12,16,.55);display:none;align-items:flex-end;justify-content:center;z-index:20}
+.modal.on{display:flex}
+.sheet{background:var(--panel);width:100%;max-width:720px;max-height:92vh;overflow:auto;border-radius:18px 18px 0 0;padding:18px}
+@media(min-width:760px){.modal{align-items:center}.sheet{border-radius:18px}}
+.sheet h3{font-size:18px;margin-bottom:10px}
+label{display:block;font-size:13px;color:var(--muted);margin:10px 0 4px}
+input,select,textarea{width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+textarea{min-height:80px;resize:vertical}
+.out{background:var(--panel2);border-radius:10px;padding:12px;font-size:14px;overflow-wrap:anywhere}
+.out h1,.out h2,.out h3{font-size:15px;margin:10px 0 4px}.out p{margin:6px 0}.out ul{margin:6px 0;padding-left:20px}
+.out code{background:var(--panel);padding:1px 4px;border-radius:4px}
+pre{white-space:pre-wrap;font-size:12px;margin:0}
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--text);color:var(--bg);padding:10px 16px;border-radius:12px;opacity:0;transition:opacity .2s;z-index:30;max-width:90vw}
+.toast.on{opacity:1}
+.tpl{display:flex;gap:10px;align-items:flex-start;padding:10px;border:1px solid var(--line);border-radius:12px;margin-bottom:8px;cursor:pointer}
+.tpl:hover{border-color:var(--accent)}
+.empty{color:var(--muted);text-align:center;padding:24px}
+/* chat */
+body.chatmode main{padding-bottom:150px}
+.chat{display:flex;flex-direction:column;gap:10px}
+.msg{display:flex;gap:8px;align-items:flex-end;max-width:92%}
+.msg .av{width:34px;height:34px;font-size:18px;border-radius:10px}
+.bub{background:var(--panel);border:1px solid var(--line);border-radius:16px 16px 16px 4px;padding:9px 12px;box-shadow:var(--shadow);min-width:0;overflow-wrap:anywhere}
+.bub .who{font-size:12px;color:var(--muted);margin-bottom:2px}
+.bub .tm{font-size:11px;color:var(--muted);margin-top:4px;text-align:right}
+.msg.me{align-self:flex-end;flex-direction:row-reverse}
+.msg.me .bub{background:var(--accent);color:#fff;border-color:var(--accent);border-radius:16px 16px 4px 16px}
+.msg.me .bub .tm{color:rgba(255,255,255,.75)}
+.msg.me .bub a{color:#fff}
+.msg.sys{align-self:center;max-width:100%}
+.msg.sys .bub{background:var(--panel2);box-shadow:none;font-size:13px;color:var(--muted);border-radius:12px}
+.bub code{background:var(--panel2);padding:1px 4px;border-radius:4px;font-size:12px}
+.bub video{width:100%;max-width:300px;border-radius:12px;margin-top:8px;display:block;background:#000}
+.apbox{margin-top:8px;padding-top:8px;border-top:1px dashed var(--line)}
+.copyrow{display:flex;gap:6px;align-items:flex-start;margin-top:6px}
+.copyrow div{flex:1;background:var(--panel2);border-radius:8px;padding:6px 8px;font-size:13px;white-space:pre-wrap;max-height:110px;overflow:auto}
+.daysep{align-self:center;font-size:12px;color:var(--muted);margin:6px 0}
+#composer{position:fixed;left:0;right:0;bottom:0;background:var(--panel);border-top:1px solid var(--line);padding:8px 10px calc(8px + env(safe-area-inset-bottom));z-index:6;display:none}
+body.chatmode #composer{display:block}
+#composer .in{max-width:1200px;margin:auto}
+#composer .chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none}
+#composer .chips button{flex:none;border:1px solid var(--line);background:var(--panel2);border-radius:99px;padding:4px 10px;font-size:13px;cursor:pointer}
+#composer form{display:flex;gap:8px;align-items:flex-end}
+#composer textarea{min-height:42px;max-height:120px;border-radius:21px;padding:10px 14px;resize:none}
+#composer .send{width:44px;height:42px;border-radius:50%;border:0;background:var(--accent);color:#fff;font-size:18px;cursor:pointer;flex:none}
+.sending{opacity:.65}
+[dir=rtl]{font-family:"Noto Nastaliq Urdu","Jameel Noori Nastaleeq",system-ui;line-height:2}
+</style>
+</head>
+<body>
+<header>
+  <div class="top">
+    <div class="logo">HQ</div>
+    <div class="co"><b id="coName">Agent HQ</b><small id="hb">loading…</small></div>
+    <button class="btn" id="btnRun" title="Run a heartbeat now">⚡ Run now</button>
+    <button class="btn" id="btnSettings" title="Settings">⚙</button>
+  </div>
+  <nav id="nav">
+    <a href="#chat">💬 Chat</a><a href="#overview">Dashboard</a><a href="#approvals">Approvals<span class="count" id="apCount" hidden></span></a>
+    <a href="#board">Tasks</a><a href="#org">Org chart</a><a href="#agents">Agents</a><a href="#goals">Goals</a><a href="#activity">Activity</a>
+  </nav>
+</header>
+<main id="main"></main>
+<div id="composer"><div class="in">
+  <div class="chips">
+    <button type="button" onclick="quick('What is pending?')">⏳ What's pending?</button>
+    <button type="button" onclick="quick('/short')">🎬 Make a Short now</button>
+    <button type="button" onclick="quick('How much have we spent this month?')">💸 Spending</button>
+    <button type="button" onclick="quick('/help')">❓ Help</button>
+  </div>
+  <form id="chatForm"><textarea id="chatIn" rows="1" placeholder="Message your Manager…"></textarea><button class="send" title="Send">➤</button></form>
+</div></div>
+
+<div class="modal" id="modal"><div class="sheet" id="sheet"></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============ storage & config ============ */
+const LS = {
+  get(k, d) { try { const v = localStorage.getItem("hq_" + k); return v === null ? d : JSON.parse(v); } catch { return d; } },
+  set(k, v) { try { localStorage.setItem("hq_" + k, JSON.stringify(v)); } catch {} },
+};
+let cfg = { repo: LS.get("repo", "SFALI110/AI-Agents"), token: LS.get("token", ""), branch: LS.get("branch", "main") };
+let S = null, pending = [], lastRun = null, demo = false, refreshTimer = null;
+
+/* ============ helpers ============ */
+const $ = (s, el = document) => el.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const money = v => "$" + (Number(v) || 0).toFixed(2);
+const rtl = s => /[؀-ۿ]/.test(s || "") ? ' dir="rtl"' : "";
+function ago(iso) {
+  if (!iso) return "never";
+  const s = (Date.now() - new Date(iso).getTime()) / 1000;
+  if (s < 60) return "just now"; if (s < 3600) return Math.round(s / 60) + " min ago";
+  if (s < 86400) return Math.round(s / 3600) + " h ago"; return Math.round(s / 86400) + " d ago";
+}
+function hhmm(iso) { const d = new Date(iso); return d.toLocaleDateString([], { month: "short", day: "numeric" }) + " " + d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }); }
+function md(src) {
+  let h = esc(src || "");
+  h = h.replace(/```([\s\S]*?)```/g, (_, c) => "<pre>" + c + "</pre>");
+  h = h.replace(/^### (.*)$/gm, "<h3>$1</h3>").replace(/^## (.*)$/gm, "<h2>$1</h2>").replace(/^# (.*)$/gm, "<h1>$1</h1>");
+  h = h.replace(/\*\*(.+?)\*\*/g, "<b>$1</b>").replace(/`([^`]+)`/g, "<code>$1</code>");
+  h = h.replace(/(?:^|\n)((?:[-*•] .*(?:\n|$))+)/g, (_, b) => "<ul>" + b.trim().split("\n").map(l => "<li>" + l.replace(/^[-*•] /, "") + "</li>").join("") + "</ul>");
+  h = h.replace(/(?:^|\n)((?:\d+\. .*(?:\n|$))+)/g, (_, b) => "<ol>" + b.trim().split("\n").map(l => "<li>" + l.replace(/^\d+\. /, "") + "</li>").join("") + "</ol>");
+  return h.split(/\n{2,}/).map(p => /^<(h\d|ul|ol|pre)/.test(p) ? p : "<p>" + p.replace(/\n/g, "<br>") + "</p>").join("");
+}
+function toast(msg) { const t = $("#toast"); t.textContent = msg; t.classList.add("on"); clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove("on"), 3200); }
+/* tiny key-value store the service worker can also read (for Approve from a notification) */
+const IDB = {
+  db() { return new Promise((res, rej) => { const r = indexedDB.open("hq", 1); r.onupgradeneeded = () => r.result.createObjectStore("kv"); r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); }); },
+  async set(k, v) { try { const d = await this.db(); await new Promise((res, rej) => { const t = d.transaction("kv", "readwrite"); t.objectStore("kv").put(v, k); t.oncomplete = res; t.onerror = rej; }); } catch {} },
+};
+function syncIDB() { IDB.set("cfg", { repo: cfg.repo, token: cfg.token, branch: cfg.branch }); }
+/* engine messages use a few tags (<b>, <code>, <a>); keep only those */
+function safe(html) {
+  const doc = new DOMParser().parseFromString("<div>" + String(html || "").replace(/\n/g, "<br>") + "</div>", "text/html");
+  const walk = el => { [...el.childNodes].forEach(n => {
+    if (n.nodeType === 1) {
+      const tag = n.tagName.toLowerCase();
+      if (!["b", "strong", "i", "em", "code", "br", "a", "u"].includes(tag)) { n.replaceWith(...n.childNodes); return walk(el); }
+      [...n.attributes].forEach(a => { if (!(tag === "a" && a.name === "href" && /^https:\/\//.test(a.value))) n.removeAttribute(a.name); });
+      if (tag === "a") { n.setAttribute("target", "_blank"); n.setAttribute("rel", "noopener"); }
+      walk(n);
+    } else if (n.nodeType !== 3) n.remove();
+  }); };
+  walk(doc.body.firstChild);
+  return doc.body.firstChild.innerHTML;
+}
+const agentOf = id => S.agents.find(a => a.id === id);
+const goalOf = id => S.goals.find(g => g.id === id);
+const taskOf = id => S.tasks.find(t => t.id === id);
+const spentOf = id => (S.usage?.by_agent?.[id]?.usd) || 0;
+const pendingApprovals = () => S.approvals.filter(a => a.status === "pending");
+function aname(id) { if (id === "ceo") return "👑 You (CEO)"; const a = agentOf(id); return a ? `${a.emoji || "🤖"} ${a.name}` : id; }
+
+/* ============ GitHub API ============ */
+async function gh(path, opts = {}) {
+  const r = await fetch("https://api.github.com" + path, {
+    ...opts, headers: { Authorization: "Bearer " + cfg.token, Accept: opts.accept || "application/vnd.github+json", ...(opts.headers || {}) },
+  });
+  if (!r.ok) throw new Error(`GitHub ${r.status}: ${(await r.text()).slice(0, 160)}`);
+  return opts.accept === "application/vnd.github.raw+json" ? r.text() : (r.status === 204 ? null : r.json());
+}
+function b64(str) { return btoa(String.fromCharCode(...new TextEncoder().encode(str))); }
+
+async function load() {
+  try {
+    if (!cfg.token) {
+      demo = true;
+      S = await (await fetch("demo-state.json", { cache: "no-store" })).json();
+      pending = []; lastRun = null;
+    } else {
+      demo = false;
+      const raw = await gh(`/repos/${cfg.repo}/contents/data/state.json?ref=${cfg.branch}&t=${Date.now()}`, { accept: "application/vnd.github.raw+json" });
+      S = JSON.parse(raw);
+      try {
+        const files = await gh(`/repos/${cfg.repo}/contents/commands?ref=${cfg.branch}&t=${Date.now()}`);
+        pending = files.filter(f => f.name.endsWith(".json"));
+      } catch { pending = []; }
+      try {
+        const runs = await gh(`/repos/${cfg.repo}/actions/workflows/heartbeat.yml/runs?per_page=1`);
+        lastRun = runs.workflow_runs?.[0] || null;
+      } catch { lastRun = null; }
+    }
+    if (!videoPlaying()) render();
+  } catch (e) {
+    $("#main").innerHTML = `<div class="banner">Could not load your company: ${esc(e.message)}<br>Check the repo name and token in ⚙ Settings.</div>`;
+  }
+}
+
+async function send(cmd, label, silent) {
+  if (demo) { toast("Demo mode — add your GitHub token in ⚙ Settings to control your real company"); return; }
+  const name = `${Date.now()}-${Math.random().toString(36).slice(2, 7)}.json`;
+  try {
+    await gh(`/repos/${cfg.repo}/contents/commands/${name}`, {
+      method: "PUT", body: JSON.stringify({ message: `command: ${cmd.type}`, content: b64(JSON.stringify({ ...cmd, source: "app" }, null, 1)), branch: cfg.branch }),
+    });
+    pending.push({ name });
+    if (!silent) toast((label || "Sent") + " — the team picks it up in about a minute");
+    render();
+    clearTimeout(refreshTimer); refreshTimer = setTimeout(load, 75000);
+  } catch (e) { toast("Failed: " + e.message); }
+}
+
+async function runNow() {
+  if (demo) { toast("Demo mode — connect your repo in ⚙ Settings first"); return; }
+  try {
+    await gh(`/repos/${cfg.repo}/actions/workflows/heartbeat.yml/dispatches`, { method: "POST", body: JSON.stringify({ ref: cfg.branch }) });
+    toast("⚡ Heartbeat started — refresh in a minute or two");
+    clearTimeout(refreshTimer); refreshTimer = setTimeout(load, 90000);
+  } catch (e) { toast("Failed: " + e.message); }
+}
+
+/* ============ views ============ */
+const VIEWS = { chat, overview, approvals, board, org, agents, goals, activity };
+function view() { const v = (location.hash || "#chat").slice(1); return VIEWS[v] ? v : "chat"; }
+
+function render() {
+  if (!S) return;
+  $("#coName").textContent = S.company.name;
+  const running = lastRun && lastRun.status !== "completed";
+  $("#hb").textContent = (running ? "⚙ Team is working now · " : "Last heartbeat " + ago(S.last_heartbeat)) + (pending.length ? ` · ⏳ ${pending.length} queued` : "");
+  const n = pendingApprovals().length; const c = $("#apCount"); c.hidden = !n; c.textContent = n;
+  document.querySelectorAll("nav a").forEach(a => a.classList.toggle("on", a.getAttribute("href") === "#" + view()));
+  let top = "";
+  if (demo) top = `<div class="banner">👀 <b>Demo data.</b> This shows how your company will look. Open ⚙ Settings and add your GitHub token to connect your real company.</div>`;
+  const isChat = view() === "chat";
+  document.body.classList.toggle("chatmode", isChat);
+  const nearBottom = window.innerHeight + window.scrollY >= document.body.scrollHeight - 160;
+  $("#main").innerHTML = top + VIEWS[view()]();
+  if (isChat && (nearBottom || !render._seen)) { window.scrollTo(0, document.body.scrollHeight); render._seen = true; }
+  restoreVideos();
+}
+
+function apCard(ap) {
+  const t = taskOf(ap.task) || {}; const a = agentOf(ap.agent) || {};
+  const d = t.data || {};
+  const isVideo = ap.kind === "video";
+  return `<div class="item">
+    <div class="row"><span class="pill ${isVideo ? "acc" : "warn"}">${isVideo ? "🎬 Video" : "🗂 Deliverable"}</span><b>${esc(ap.title)}</b><span class="muted small">${esc(ap.id)} · ${aname(ap.agent)} · ${ago(ap.created)}</span></div>
+    ${isVideo ? `<div class="out" style="margin-top:8px"${rtl(d.title)}><b>${esc(d.title)}</b><br><span class="muted">${esc(d.topic)} · ${esc(d.seconds)}s · ${esc(d.language)}</span><br><span class="small muted">▶ Watch it in 💬 Chat before approving.</span></div>`
+      : `<div class="out" style="margin-top:8px;max-height:220px;overflow:auto"${rtl(t.output)}>${md(t.output || ap.preview)}</div>`}
+    <div class="row" style="margin-top:8px">
+      <button class="btn ok sm" onclick="decide('${ap.id}','approve')">✅ Approve</button>
+      <button class="btn sm" onclick="decide('${ap.id}','redo')">🔄 Redo…</button>
+      <button class="btn bad sm" onclick="decide('${ap.id}','reject')">❌ Reject</button>
+      <span class="spacer"></span><button class="btn sm" onclick="openTask('${ap.task}')">Details</button>
+    </div></div>`;
+}
+
+function overview() {
+  const u = S.usage || {}; const cap = S.settings.company_budget_usd || 0; const spent = u.total_usd || 0;
+  const open = S.tasks.filter(t => ["todo", "doing", "review", "blocked"].includes(t.status)).length;
+  const blocked = S.tasks.filter(t => t.status === "blocked").length;
+  const act = S.agents.filter(a => a.status === "active").length;
+  const pct = cap ? Math.min(100, spent / cap * 100) : 0;
+  const ap = pendingApprovals();
+  return `<div class="grid kpis">
+    <div class="card kpi"><small>Waiting for you</small><b>${ap.length}</b></div>
+    <div class="card kpi"><small>Open tasks</small><b>${open}</b>${blocked ? `<div class="small" style="color:var(--bad)">${blocked} blocked</div>` : ""}</div>
+    <div class="card kpi"><small>Active agents</small><b>${act}</b><div class="small muted">of ${S.agents.filter(a => a.status !== "fired").length}</div></div>
+    <div class="card kpi"><small>AI spend · ${esc(u.month || "")}</small><b>${money(spent)}</b><div class="small muted">limit ${money(cap)}</div><div class="bar"><i class="${pct > 90 ? "full" : pct > 70 ? "hot" : ""}" style="width:${pct}%"></i></div></div>
+  </div>
+  <div class="card" style="margin-top:12px"><div class="small muted">Mission</div><div>${esc(S.company.mission)}</div></div>
+  <h2>Waiting for your decision</h2>
+  <div class="card">${ap.length ? ap.map(apCard).join("") : `<div class="empty">Nothing waiting. Your team is on it ✨</div>`}</div>
+  <h2>Recent activity</h2>
+  <div class="card">${actList(S.activity.slice(-8).reverse())}</div>`;
+}
+
+function approvals() {
+  const ap = pendingApprovals();
+  const done = S.approvals.filter(a => a.status !== "pending").slice(-15).reverse();
+  return `<h2>Waiting for you (${ap.length})</h2><div class="card">${ap.length ? ap.map(apCard).join("") : `<div class="empty">All clear.</div>`}</div>
+  <h2>Recently decided</h2><div class="card">${done.length ? done.map(a => `<div class="item row"><span class="pill ${a.status === "approved" ? "ok" : a.status === "redo" ? "warn" : "bad"}">${esc(a.status)}</span><b>${esc(a.title)}</b><span class="muted small">${esc(a.id)} · ${ago(a.decided)}${a.note ? " · “" + esc(a.note) + "”" : ""}</span></div>`).join("") : `<div class="empty">No decisions yet.</div>`}</div>`;
+}
+
+const COLS = [["todo", "To do"], ["doing", "Working"], ["review", "Your review"], ["blocked", "Blocked"], ["done", "Done"]];
+function board() {
+  const goalsSel = `<select id="fGoal" onchange="LS.set('fGoal',this.value);render()" style="width:auto"><option value="">All goals</option>${S.goals.map(g => `<option value="${g.id}" ${LS.get("fGoal", "") === g.id ? "selected" : ""}>${esc(g.id)} · ${esc(g.title)}</option>`).join("")}</select>`;
+  const f = LS.get("fGoal", "");
+  const ts = S.tasks.filter(t => !f || t.goal === f);
+  return `<div class="row" style="margin-bottom:12px">${goalsSel}<span class="spacer"></span><button class="btn primary" onclick="newTask()">+ New task</button></div>
+  <div class="board">${COLS.map(([k, label]) => {
+    let list = ts.filter(t => t.status === k);
+    if (k === "done") list = list.concat(ts.filter(t => t.status === "cancelled")).slice(-25).reverse();
+    return `<div class="col"><h4><span>${label}</span><span>${list.length}</span></h4>${list.map(tCard).join("") || `<div class="empty small">—</div>`}</div>`;
+  }).join("")}</div>`;
+}
+function tCard(t) {
+  const g = goalOf(t.goal);
+  return `<div class="tcard" onclick="openTask('${t.id}')"><div class="row"><span class="id">${esc(t.id)}</span>${t.needs_approval ? `<span class="pill acc">needs OK</span>` : ""}${t.status === "cancelled" ? `<span class="pill bad">cancelled</span>` : ""}</div>
+    <div class="t"${rtl(t.title)}>${esc(t.title)}</div><div class="row small muted"><span>${aname(t.assignee)}</span>${t.cost_usd ? `<span>· ${money(t.cost_usd)}</span>` : ""}</div>
+    ${g ? `<div class="small muted" style="margin-top:4px">🎯 ${esc(g.title)}</div>` : ""}${t.status === "blocked" && t.blocker ? `<div class="small" style="color:var(--bad);margin-top:4px">${esc(t.blocker).slice(0, 120)}</div>` : ""}</div>`;
+}
+
+function org() {
+  const kids = id => S.agents.filter(a => (a.reports_to || "ceo") === id && a.status !== "fired");
+  const node = a => `<li><div class="node"><div class="em">${a.emoji || "🤖"}</div><b>${esc(a.name)}</b><small>${esc(a.title)}</small><div style="margin-top:4px">${statusPill(a)}</div><div class="small muted">${a.kind === "tool" ? "tool" : esc(a.model || "")}</div></div>${kids(a.id).length ? `<ul>${kids(a.id).map(node).join("")}</ul>` : ""}</li>`;
+  return `<h2>Who reports to whom</h2><div class="card org"><ul class="tree"><li><div class="node ceo"><div class="em">👑</div><b>${esc(S.company.ceo || "You")}</b><small>CEO (human)</small></div>${kids("ceo").length ? `<ul>${kids("ceo").map(node).join("")}</ul>` : ""}</li></ul></div>
+  <p class="small muted">Change who reports to whom in Agents → Edit.</p>`;
+}
+function statusPill(a) {
+  return { active: `<span class="pill ok">active</span>`, paused: `<span class="pill warn">paused</span>`, paused_budget: `<span class="pill bad">budget used</span>`, fired: `<span class="pill">let go</span>` }[a.status] || `<span class="pill">${esc(a.status)}</span>`;
+}
+
+function agents() {
+  return `<div class="row" style="margin-bottom:12px"><span class="muted small">Gemini = free · Claude = paid, smarter. Budgets reset every month.</span><span class="spacer"></span><button class="btn primary" onclick="hire()">+ Hire agent</button></div>
+  <div class="grid agents">${S.agents.filter(a => a.status !== "fired").map(a => {
+    const sp = spentOf(a.id), b = a.budget_usd || 0, pct = b ? Math.min(100, sp / b * 100) : 0;
+    const runs = S.usage?.by_agent?.[a.id]?.runs || 0;
+    const doing = S.tasks.filter(t => t.assignee === a.id && ["todo", "doing"].includes(t.status)).length;
+    return `<div class="card"><div class="row"><div class="av">${a.emoji || "🤖"}</div><div style="flex:1;min-width:0"><h3>${esc(a.name)}</h3><div class="small muted">${esc(a.title)}</div></div>${statusPill(a)}</div>
+      <div class="small" style="margin-top:10px">${a.kind === "tool" ? "🛠 Tool agent (no AI cost)" : `${a.provider === "claude" ? "🟣 Claude" : "🔵 Gemini"} · <code>${esc(a.model)}</code>`}</div>
+      ${a.kind === "llm" ? `<div class="small muted" style="margin-top:6px">${money(sp)} of ${money(b)} this month</div><div class="bar"><i class="${pct > 90 ? "full" : pct > 70 ? "hot" : ""}" style="width:${pct}%"></i></div>` : ""}
+      <div class="small muted" style="margin-top:6px">${runs} runs this month · ${doing} in queue · reports to ${aname(a.reports_to || "ceo")}</div>
+      <div class="row" style="margin-top:10px"><button class="btn sm" onclick="editAgent('${a.id}')">Edit</button>
+      ${a.status === "active" ? `<button class="btn sm" onclick="send({type:'update_agent',id:'${a.id}',fields:{status:'paused'}},'Pausing')">Pause</button>` : `<button class="btn sm" onclick="send({type:'update_agent',id:'${a.id}',fields:{status:'active'}},'Resuming')">Resume</button>`}</div></div>`;
+  }).join("")}</div>`;
+}
+
+function goals() {
+  return `<div class="row" style="margin-bottom:12px"><span class="spacer"></span><button class="btn primary" onclick="newGoal()">+ New goal</button></div>
+  <div class="card">${S.goals.slice().reverse().map(g => {
+    const ts = S.tasks.filter(t => t.goal === g.id), done = ts.filter(t => t.status === "done").length;
+    const pb = g.playbook === "youtube_daily" ? `🎬 Daily Short · ${esc(g.params?.language === "ur" ? "Urdu" : "English")} · every ${g.schedule?.every_days || 1} day(s) at ${g.schedule?.at_hour ?? 9}:00 PKT` : "🧭 Planned by the Manager";
+    return `<div class="item"><div class="row"><span class="pill ${g.status === "active" ? "ok" : g.status === "done" ? "acc" : "warn"}">${esc(g.status)}</span><b${rtl(g.title)}>${esc(g.title)}</b><span class="muted small">${esc(g.id)}</span></div>
+      <div class="small muted" style="margin-top:4px">${pb}${g.last_run ? " · last run " + esc(g.last_run.replace("T", " ")) : ""}</div>
+      <div class="small muted">${done}/${ts.length} tasks done</div>
+      <div class="row" style="margin-top:8px">${g.playbook && g.status === "active" ? `<button class="btn sm" onclick="send({type:'run_goal_now',id:'${g.id}'},'Starting now')">▶ Run now</button>` : ""}
+      ${g.status === "active" ? `<button class="btn sm" onclick="send({type:'update_goal',id:'${g.id}',status:'paused'},'Pausing goal')">Pause</button>` : g.status === "paused" ? `<button class="btn sm" onclick="send({type:'update_goal',id:'${g.id}',status:'active'},'Activating goal')">Activate</button>` : ""}
+      <button class="btn sm" onclick="LS.set('fGoal','${g.id}');location.hash='#board'">View tasks</button></div></div>`;
+  }).join("") || `<div class="empty">No goals yet.</div>`}</div>`;
+}
+
+function actList(items) {
+  return items.length ? items.map(e => `<div class="act"><time>${hhmm(e.t)}</time><div><b>${aname(e.agent === "system" ? "system" : e.agent).replace("system", "⚙ System")}</b> <span class="${e.type === "error" ? "" : "muted"}" style="${e.type === "error" ? "color:var(--bad)" : ""}"${rtl(e.text)}>${esc(e.text)}</span></div></div>`).join("") : `<div class="empty">No activity yet.</div>`;
+}
+function activity() {
+  const f = LS.get("fAgent", "");
+  const sel = `<select style="width:auto" onchange="LS.set('fAgent',this.value);render()"><option value="">Everyone</option>${["ceo", "system", ...S.agents.map(a => a.id)].map(id => `<option value="${id}" ${f === id ? "selected" : ""}>${id}</option>`).join("")}</select>`;
+  const items = S.activity.filter(e => !f || e.agent === f).slice(-150).reverse();
+  return `<div class="row" style="margin-bottom:12px">${sel}</div><div class="card">${actList(items)}</div>`;
+}
+
+
+/* ============ chat ============ */
+let outbox = LS.get("outbox", []);        // your messages not yet answered by the engine
+const videoCache = {};                     // video id -> blob URL
+function chatMessages() {
+  const msgs = (S.chat || []).slice(-150);
+  // drop local pending messages once the engine has them
+  outbox = outbox.filter(o => !msgs.some(m => m.from === "ceo" && m.t >= o.t0 && plainText(m.text).trim() === o.text.trim()) && Date.now() - o.ts < 15 * 60000);
+  LS.set("outbox", outbox);
+  return msgs;
+}
+function plainText(h) { const d = document.createElement("div"); d.innerHTML = h || ""; return d.textContent; }
+function chat() {
+  const msgs = chatMessages();
+  let lastDay = "", html = "";
+  if (!msgs.length && !outbox.length) html += `<div class="msg sys"><div class="bub">👋 Say hello to your Manager. Try: <b>Make a Short about Scrum vs Kanban</b></div></div>`;
+  for (const m of msgs) {
+    const day = new Date(m.t).toDateString();
+    if (day !== lastDay) { html += `<div class="daysep">${new Date(m.t).toLocaleDateString([], { weekday: "short", month: "short", day: "numeric" })}</div>`; lastDay = day; }
+    html += bubble(m);
+  }
+  for (const o of outbox) html += `<div class="msg me sending"><div class="bub">${esc(o.text)}<div class="tm">sending… the team replies in 1–2 min</div></div></div>`;
+  return `<div class="chat">${html}</div>`;
+}
+function bubble(m) {
+  const tm = new Date(m.t).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+  if (m.from === "ceo") return `<div class="msg me"><div class="bub"${rtl(m.text)}>${safe(m.text)}<div class="tm">${tm}</div></div></div>`;
+  const a = agentOf(m.from);
+  if (!a && m.from === "system" && !m.approval) return `<div class="msg sys"><div class="bub">${safe(m.text)}</div></div>`;
+  const name = a ? a.name : "Agent HQ", em = a ? (a.emoji || "🤖") : "⚙️";
+  let extra = "";
+  if (m.approval) {
+    const ap = S.approvals.find(x => x.id === m.approval);
+    if (m.video) extra += `<div data-video="${esc(m.video)}">${ap && ap.status === "pending" ? `<button class="btn sm" style="margin-top:8px" onclick="playVideo('${esc(m.video)}', this)">▶ Watch video</button>` : ""}</div>`;
+    if (ap) extra += `<div class="apbox">${ap.status === "pending"
+      ? `<div class="row"><button class="btn ok sm" onclick="decide('${ap.id}','approve')">✅ Approve</button><button class="btn sm" onclick="decide('${ap.id}','redo')">🔄 Redo…</button><button class="btn bad sm" onclick="decide('${ap.id}','reject')">❌ Reject</button></div>`
+      : `<span class="pill ${ap.status === "approved" ? "ok" : ap.status === "redo" ? "warn" : "bad"}">${ap.status === "approved" ? "✅ Approved" : ap.status === "redo" ? "🔄 Redo requested" : "❌ Rejected"}</span>`}</div>`;
+  }
+  if (m.post) {
+    const p = m.post, k = esc(m.id);
+    extra += `<div class="apbox"><button class="btn primary sm" onclick="downloadVideo('${esc(p.file)}', this)">⬇ Download video</button>
+      ${[["Title", p.title], ["Description", p.description], ["Tags", p.tags]].map(([l, v], i) => `<div class="copyrow"><div${rtl(v)}><b>${l}:</b> ${esc(v)}</div><button class="btn sm" onclick="copyText(this, ${i}, '${k}')">Copy</button></div>`).join("")}</div>`;
+  }
+  const body = safe(String(m.text || "").replace(/\*\*(.+?)\*\*/g, "<b>$1</b>"));
+  const long = plainText(m.text).length > 700;
+  const more = long && m.task ? `<button class="btn sm" style="margin-top:6px" onclick="openTask('${esc(m.task)}')">Read full result</button>` : "";
+  return `<div class="msg"><div class="av">${em}</div><div class="bub"><div class="who">${esc(name)}</div><div${rtl(m.text)} style="${long ? "max-height:260px;overflow:hidden;-webkit-mask-image:linear-gradient(#000 75%,transparent)" : ""}">${body}</div>${more}${extra}<div class="tm">${tm}</div></div></div>`;
+}
+function copyText(btn, i, msgId) {
+  const m = (S.chat || []).find(x => x.id === msgId); if (!m) return;
+  const v = [m.post.title, m.post.description, m.post.tags][i];
+  navigator.clipboard.writeText(v).then(() => { btn.textContent = "Copied ✓"; setTimeout(() => btn.textContent = "Copy", 1500); }, () => toast("Couldn't copy — long-press the text instead"));
+}
+async function rawFile(name) {
+  const r = await fetch(`https://api.github.com/repos/${cfg.repo}/contents/${encodeURIComponent(name)}?ref=previews`, { headers: { Authorization: "Bearer " + cfg.token, Accept: "application/vnd.github.raw" } });
+  if (!r.ok) throw new Error(r.status === 404 ? "This video is no longer available" : "GitHub " + r.status);
+  return URL.createObjectURL(await r.blob());
+}
+async function playVideo(vid, btn) {
+  if (demo) return toast("Demo mode — videos play once your real company is connected");
+  btn.disabled = true; btn.textContent = "Loading video…";
+  try {
+    videoCache[vid] = videoCache[vid] || await rawFile(vid + ".mp4");
+    btn.outerHTML = `<video src="${videoCache[vid]}" controls playsinline></video>`;
+  } catch (e) { btn.disabled = false; btn.textContent = "▶ Watch video"; toast(e.message); }
+}
+function restoreVideos() {
+  document.querySelectorAll("[data-video]").forEach(el => { const v = el.dataset.video; if (videoCache[v] && el.querySelector("button")) el.innerHTML = `<video src="${videoCache[v]}" controls playsinline></video>`; });
+}
+function videoPlaying() { return [...document.querySelectorAll("video")].some(v => !v.paused); }
+async function downloadVideo(name, btn) {
+  if (demo) return toast("Demo mode — connect your company first");
+  btn.disabled = true; btn.textContent = "Downloading…";
+  try {
+    const url = await rawFile(name);
+    const a = document.createElement("a"); a.href = url; a.download = name.replace("-full", ""); document.body.appendChild(a); a.click(); a.remove();
+    btn.textContent = "⬇ Downloaded ✓";
+  } catch (e) { toast(e.message); btn.textContent = "⬇ Download video"; }
+  btn.disabled = false;
+}
+async function sendChat(text) {
+  text = text.trim(); if (!text) return;
+  if (demo) return toast("Demo mode — add your GitHub token in ⚙ Settings to chat with your real team");
+  const o = { text, ts: Date.now(), t0: new Date(Date.now() - 120000).toISOString() };
+  outbox.push(o); LS.set("outbox", outbox); render(); window.scrollTo(0, document.body.scrollHeight);
+  await send({ type: "chat", text }, null, true);
+  fastPoll();
+}
+function quick(t) { if (t === "/short") return sendChat("/short"); sendChat(t); }
+let fastTimer = null;
+function fastPoll(n = 0) { clearTimeout(fastTimer); if (n > 20) return; fastTimer = setTimeout(async () => { await load(); if (outbox.length) fastPoll(n + 1); }, n < 3 ? 25000 : 12000); }
+$("#chatForm").addEventListener("submit", e => { e.preventDefault(); const t = $("#chatIn"); const v = t.value; t.value = ""; t.style.height = ""; sendChat(v); });
+$("#chatIn").addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey && window.innerWidth > 700) { e.preventDefault(); $("#chatForm").requestSubmit(); } });
+$("#chatIn").addEventListener("input", e => { e.target.style.height = "auto"; e.target.style.height = Math.min(e.target.scrollHeight, 120) + "px"; });
+
+/* ============ install + notifications ============ */
+let installEvt = null;
+window.addEventListener("beforeinstallprompt", e => { e.preventDefault(); installEvt = e; });
+const isStandalone = () => matchMedia("(display-mode: standalone)").matches || navigator.standalone;
+async function installApp() {
+  if (installEvt) { installEvt.prompt(); installEvt = null; return; }
+  if (/iphone|ipad/i.test(navigator.userAgent)) toast("On iPhone: tap Share ⬆ then 'Add to Home Screen'");
+  else toast("In Chrome: tap ⋮ menu → 'Install app' (or 'Add to Home screen')");
+}
+function b64ToBytes(b64) { const p = "=".repeat((4 - b64.length % 4) % 4); const s = atob((b64 + p).replace(/-/g, "+").replace(/_/g, "/")); return Uint8Array.from(s, c => c.charCodeAt(0)); }
+async function enableNotifications() {
+  if (demo) return toast("Connect your company first (token in Settings)");
+  if (!("serviceWorker" in navigator) || !("PushManager" in window)) return toast("This browser can't receive notifications. On iPhone, install the app to the Home Screen first.");
+  const key = S.settings.vapid_public;
+  if (!key) return toast("Run your first heartbeat (GitHub → Actions → heartbeat), then try again");
+  const perm = await Notification.requestPermission();
+  if (perm !== "granted") return toast("Notifications were blocked. Allow them in your browser settings.");
+  const reg = await navigator.serviceWorker.ready;
+  let sub = await reg.pushManager.getSubscription();
+  if (!sub) sub = await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: b64ToBytes(key) });
+  syncIDB();
+  const dev = (/android/i.test(navigator.userAgent) ? "Android" : /iphone|ipad/i.test(navigator.userAgent) ? "iPhone" : "Computer") + " · " + new Date().toLocaleDateString();
+  await send({ type: "push_subscribe", subscription: sub.toJSON(), device: dev }, "🔔 Notifications on");
+  LS.set("pushOn", true);
+}
+if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(() => {});
+navigator.serviceWorker?.addEventListener("message", e => { if (e.data === "refresh") load(); });
+
+/* ============ modals & actions ============ */
+function modal(html) { $("#sheet").innerHTML = html; $("#modal").classList.add("on"); }
+function close_() { $("#modal").classList.remove("on"); }
+$("#modal").addEventListener("click", e => { if (e.target.id === "modal") close_(); });
+
+function decide(id, type) {
+  if (type === "approve") return send({ type, approval: id }, "✅ Approved");
+  modal(`<h3>${type === "redo" ? "🔄 Ask for a new version" : "❌ Reject"}</h3>
+    <label>${type === "redo" ? "What should change? (the agent will read this)" : "Reason (optional)"}</label>
+    <textarea id="note" placeholder="${type === "redo" ? "e.g. Make the hook more surprising, use a real project example" : ""}"></textarea>
+    <div class="row" style="margin-top:12px"><span class="spacer"></span><button class="btn" onclick="close_()">Cancel</button>
+    <button class="btn ${type === "redo" ? "primary" : "bad"}" onclick="send({type:'${type}',approval:'${id}',note:$('#note').value},'${type === "redo" ? "Redo requested" : "Rejected"}');close_()">${type === "redo" ? "Send back" : "Reject"}</button></div>`);
+}
+
+function openTask(id) {
+  const t = taskOf(id); if (!t) return;
+  const ap = S.approvals.find(a => a.task === id && a.status === "pending");
+  const deps = t.depends_on.map(d => taskOf(d)).filter(Boolean);
+  const others = S.agents.filter(a => a.status !== "fired");
+  modal(`<div class="row"><span class="pill">${esc(t.id)}</span><span class="pill ${t.status === "done" ? "ok" : t.status === "blocked" ? "bad" : t.status === "review" ? "acc" : ""}">${esc(t.status)}</span><span class="spacer"></span><button class="btn sm" onclick="close_()">✕</button></div>
+    <h3 style="margin-top:10px"${rtl(t.title)}>${esc(t.title)}</h3>
+    <div class="small muted">${aname(t.assignee)} · created by ${esc(t.created_by)} · ${ago(t.created)}${t.model_used ? " · " + esc(t.model_used) : ""}${t.cost_usd ? " · " + money(t.cost_usd) : ""}</div>
+    ${t.description ? `<label>Brief</label><div${rtl(t.description)}>${esc(t.description)}</div>` : ""}
+    ${deps.length ? `<label>Depends on</label><div class="row">${deps.map(d => `<button class="btn sm" onclick="openTask('${d.id}')">${esc(d.id)} · ${esc(d.title)}</button>`).join("")}</div>` : ""}
+    ${t.blocker ? `<label>Problem</label><div class="out" style="color:var(--bad)">${esc(t.blocker)}</div>` : ""}
+    ${t.output ? `<label>Result</label><div class="out"${rtl(t.output)}>${md(t.output)}</div>` : ""}
+    ${t.data && Object.keys(t.data).length ? `<details style="margin-top:10px"><summary class="small muted">Structured data</summary><div class="out"><pre>${esc(JSON.stringify(t.data, null, 2))}</pre></div></details>` : ""}
+    ${t.feedback?.length ? `<label>Your feedback</label><ul>${t.feedback.map(f => `<li>${esc(f)}</li>`).join("")}</ul>` : ""}
+    ${ap ? `<div class="row" style="margin-top:14px"><button class="btn ok" onclick="send({type:'approve',approval:'${ap.id}'},'✅ Approved');close_()">✅ Approve</button><button class="btn" onclick="decide('${ap.id}','redo')">🔄 Redo…</button><button class="btn bad" onclick="decide('${ap.id}','reject')">❌ Reject</button></div>` : ""}
+    ${["todo", "blocked"].includes(t.status) ? `<label>Reassign to</label><div class="row"><select id="re" style="flex:1">${others.map(a => `<option value="${a.id}" ${a.id === t.assignee ? "selected" : ""}>${a.emoji || ""} ${esc(a.name)}</option>`).join("")}</select>
+      <button class="btn" onclick="send({type:'update_task',id:'${t.id}',assignee:$('#re').value,status:'todo'},'Reassigned');close_()">Save</button></div>` : ""}
+    <div class="row" style="margin-top:14px">${t.status === "blocked" ? `<button class="btn primary" onclick="send({type:'update_task',id:'${t.id}',status:'todo'},'Retrying');close_()">↻ Retry</button>` : ""}
+    ${["todo", "blocked", "review"].includes(t.status) ? `<button class="btn bad" onclick="send({type:'update_task',id:'${t.id}',status:'cancelled'},'Cancelled');close_()">Cancel task</button>` : ""}</div>`);
+}
+
+function newTask() {
+  modal(`<h3>New task</h3><label>What needs doing?</label><input id="nt" placeholder="e.g. Write 10 Short ideas about Scrum mistakes">
+    <label>Details (optional)</label><textarea id="nd"></textarea>
+    <label>Assign to</label><select id="na">${S.agents.filter(a => a.status !== "fired" && a.kind === "llm").map(a => `<option value="${a.id}">${a.emoji || ""} ${esc(a.name)} — ${esc(a.title)}</option>`).join("")}</select>
+    <label>Goal (optional)</label><select id="ng"><option value="">— none —</option>${S.goals.filter(g => g.status === "active").map(g => `<option value="${g.id}">${esc(g.title)}</option>`).join("")}</select>
+    <label><input type="checkbox" id="nap" checked style="width:auto"> I want to approve the result</label>
+    <div class="row" style="margin-top:12px"><span class="spacer"></span><button class="btn" onclick="close_()">Cancel</button>
+    <button class="btn primary" onclick="if(!$('#nt').value.trim())return;send({type:'create_task',title:$('#nt').value,description:$('#nd').value,assignee:$('#na').value,goal:$('#ng').value||null,needs_approval:$('#nap').checked},'Task created');close_()">Create</button></div>`);
+}
+
+function newGoal() {
+  modal(`<h3>New goal</h3>
+    <label>Type</label><select id="gk" onchange="$('#yt').hidden=this.value!=='yt'"><option value="plan">🧭 One-off goal — the Manager plans it</option><option value="yt">🎬 Daily YouTube Short (repeats)</option></select>
+    <label>Goal</label><input id="gt" placeholder="e.g. Prepare a 4-week content plan for my PM channel">
+    <label>Details</label><textarea id="gd"></textarea>
+    <div id="yt" hidden><label>Language</label><select id="gl"><option value="en">English</option><option value="ur">Urdu</option></select>
+      <label>Niche</label><input id="gn" placeholder="e.g. Agile and Scrum tips for beginners">
+      <label>Audience</label><input id="ga" placeholder="e.g. new project managers in Pakistan">
+      <label>Post at (hour, Pakistan time)</label><input id="gh" type="number" min="0" max="23" value="9"></div>
+    <div class="row" style="margin-top:12px"><span class="spacer"></span><button class="btn" onclick="close_()">Cancel</button><button class="btn primary" onclick="createGoal()">Create</button></div>`);
+}
+function createGoal() {
+  const t = $("#gt").value.trim(); if (!t) return;
+  const c = { type: "create_goal", title: t, description: $("#gd").value };
+  if ($("#gk").value === "yt") Object.assign(c, { playbook: "youtube_daily", schedule: { every_days: 1, at_hour: +$("#gh").value || 9 },
+    params: { language: $("#gl").value, niche: $("#gn").value || t, audience: $("#ga").value || "general audience", tone: "clear, friendly, practical", target_seconds: 45, scenes: 6, captions: true, music_volume: 0.1, privacy: "public", youtube_token_secret: "YT_REFRESH_TOKEN" } });
+  send(c, "Goal created"); close_();
+}
+
+const TPLS = [["manager", "🧭", "Manager", "Plans goals into tasks and assigns the team"], ["researcher", "🔎", "Researcher", "Ideas, facts and trends (Gemini, free)"],
+  ["scriptwriter", "✍️", "Scriptwriter", "Shorts scripts (Claude Haiku)"], ["writer", "📝", "Writer", "Articles, emails, proposals (Claude Haiku)"],
+  ["marketer", "📣", "Marketer", "Titles, posts, hashtags (Gemini, free)"], ["analyst", "📊", "Analyst", "Requirements, risks, recommendations (Claude Sonnet)"],
+  ["video_maker", "🎬", "Video Maker", "Renders Shorts from scripts (tool)"], ["publisher", "🚀", "Publisher", "Posts approved videos (tool)"]];
+function hire() {
+  modal(`<h3>Hire an agent</h3>${TPLS.map(([k, e, n, d]) => `<div class="tpl" onclick="send({type:'hire_agent',template:'${k}'},'Hiring ${n}');close_()"><div class="av">${e}</div><div><b>${n}</b><div class="small muted">${d}</div></div></div>`).join("")}<div class="row"><span class="spacer"></span><button class="btn" onclick="close_()">Close</button></div>`);
+}
+
+function editAgent(id) {
+  const a = agentOf(id);
+  const bosses = [["ceo", "👑 You (CEO)"], ...S.agents.filter(x => x.id !== id && x.status !== "fired").map(x => [x.id, `${x.emoji || ""} ${x.name}`])];
+  modal(`<h3>${a.emoji || "🤖"} Edit ${esc(a.name)}</h3>
+    <label>Name</label><input id="en" value="${esc(a.name)}"><label>Job title</label><input id="et" value="${esc(a.title)}">
+    <label>Reports to</label><select id="er">${bosses.map(([v, l]) => `<option value="${v}" ${v === (a.reports_to || "ceo") ? "selected" : ""}>${esc(l)}</option>`).join("")}</select>
+    ${a.kind === "llm" ? `<label>AI brain</label><select id="em">
+        <option value="gemini|gemini-flash-latest" ${a.provider !== "claude" ? "selected" : ""}>🔵 Gemini Flash — free</option>
+        <option value="claude|claude-haiku-5-5" ${a.model === "claude-haiku-5-5" ? "selected" : ""}>🟣 Claude Haiku 5.5 — cheap, fast</option>
+        <option value="claude|claude-sonnet-5-5" ${a.model === "claude-sonnet-5-5" ? "selected" : ""}>🟣 Claude Sonnet 5.5 — smartest for daily work</option></select>
+      <label>Monthly budget (USD)</label><input id="eb" type="number" step="0.5" min="0" value="${a.budget_usd || 0}">
+      <label>Instructions (how this agent should work)</label><textarea id="ei" style="min-height:120px">${esc(a.instructions || "")}</textarea>` : ""}
+    <div class="row" style="margin-top:12px"><button class="btn bad" onclick="send({type:'fire_agent',id:'${id}'},'Agent let go');close_()">Let go</button><span class="spacer"></span><button class="btn" onclick="close_()">Cancel</button><button class="btn primary" onclick="saveAgent('${id}','${a.kind}')">Save</button></div>`);
+}
+function saveAgent(id, kind) {
+  const f = { name: $("#en").value, title: $("#et").value, reports_to: $("#er").value };
+  if (kind === "llm") { const [p, m] = $("#em").value.split("|"); Object.assign(f, { provider: p, model: m, budget_usd: +$("#eb").value || 0, instructions: $("#ei").value }); }
+  send({ type: "update_agent", id, fields: f }, "Saved"); close_();
+}
+
+function settings() {
+  modal(`<h3>⚙ Settings</h3>
+    <div class="banner info small">Your token stays in this browser only. Create it at GitHub → Settings → Developer settings → Fine-grained tokens, for the <b>AI-Agents</b> repo only, with <b>Contents: Read and write</b> and <b>Actions: Read and write</b>.</div>
+    <div class="row" style="margin-bottom:6px">${isStandalone() ? `<span class="pill ok">📲 App installed</span>` : `<button class="btn" onclick="installApp()">📲 Install app</button>`}
+      <button class="btn" onclick="enableNotifications()">🔔 ${LS.get("pushOn", false) ? "Re-enable" : "Enable"} notifications</button></div>
+    <label>Repository</label><input id="sr" value="${esc(cfg.repo)}"><label>Branch</label><input id="sb" value="${esc(cfg.branch)}">
+    <label>GitHub token</label><input id="st" type="password" value="${esc(cfg.token)}" placeholder="github_pat_…">
+    ${S && !demo ? `<h3 style="margin-top:18px">Company</h3>
+    <label>Name</label><input id="cn" value="${esc(S.company.name)}"><label>Mission</label><textarea id="cm">${esc(S.company.mission)}</textarea>
+    <label>Total monthly AI budget (USD)</label><input id="cb" type="number" step="1" min="0" value="${S.settings.company_budget_usd || 0}">
+    <label>YouTube upload mode</label><select id="cu"><option value="manual" ${S.settings.upload_mode !== "api" ? "selected" : ""}>Manual — bot sends you video + text to post</option><option value="api" ${S.settings.upload_mode === "api" ? "selected" : ""}>Automatic — upload via YouTube API (after audit)</option></select>` : ""}
+    <div class="row" style="margin-top:14px"><button class="btn" onclick="cfg.token='';LS.set('token','');close_();load()">Use demo data</button><span class="spacer"></span><button class="btn" onclick="close_()">Cancel</button><button class="btn primary" onclick="saveSettings()">Save</button></div>`);
+}
+function saveSettings() {
+  const changed = $("#cn") && ($("#cn").value !== S.company.name || $("#cm").value !== S.company.mission || +$("#cb").value !== (S.settings.company_budget_usd || 0) || $("#cu").value !== (S.settings.upload_mode || "manual"));
+  const fields = $("#cn") ? { name: $("#cn").value, mission: $("#cm").value, company_budget_usd: +$("#cb").value || 0, upload_mode: $("#cu").value } : null;
+  cfg = { repo: $("#sr").value.trim(), branch: $("#sb").value.trim() || "main", token: $("#st").value.trim() };
+  LS.set("repo", cfg.repo); LS.set("branch", cfg.branch); LS.set("token", cfg.token); syncIDB();
+  close_();
+  if (changed && fields) send({ type: "update_settings", fields }, "Settings saved");
+  load();
+}
+
+$("#btnRun").onclick = runNow;
+$("#btnSettings").onclick = settings;
+window.addEventListener("hashchange", render);
+setInterval(() => { if (!document.hidden && !demo) load(); }, 45000);
+document.addEventListener("visibilitychange", () => { if (!document.hidden && !demo) load(); });
+syncIDB();
+load();
+</script>
+</body>
+</html>

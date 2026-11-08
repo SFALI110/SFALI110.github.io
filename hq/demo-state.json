@@ -1,0 +1,938 @@
+{
+ "version": 1,
+ "company": {
+  "name": "SFALI Teachings HQ",
+  "mission": "Teach practical project management, Agile and IT career skills through short, clear videos and content — in English and Urdu.",
+  "ceo": "SFALI",
+  "created": "2026-11-07T20:41:35+00:00"
+ },
+ "settings": {
+  "company_budget_usd": 10.0,
+  "upload_mode": "manual",
+  "voices": {
+   "en": "en-US-AndrewNeural",
+   "ur": "ur-PK-AsadNeural",
+   "rate": "+8%"
+  },
+  "gemini_models": [
+   "gemini-flash-latest",
+   "gemini-3.6-flash",
+   "gemini-3.1-flash-lite"
+  ],
+  "prices": {},
+  "vapid_public": "demo"
+ },
+ "goals": [
+  {
+   "id": "G-1",
+   "title": "Daily English Short on SFALI TEACHINGS",
+   "description": "One YouTube Short every day for the channel.",
+   "status": "active",
+   "playbook": "youtube_daily",
+   "schedule": {
+    "every_days": 1,
+    "at_hour": 9
+   },
+   "params": {
+    "language": "en",
+    "niche": "project management tips: Agile, Scrum, Jira, stakeholder management, PMP and real IT project lessons",
+    "audience": "project managers, team leads, PMP aspirants, IT professionals",
+    "tone": "practical, confident, like a senior PM mentor",
+    "target_seconds": 45,
+    "scenes": 6,
+    "captions": true,
+    "music_volume": 0.1,
+    "privacy": "public",
+    "youtube_token_secret": "YT_REFRESH_TOKEN"
+   },
+   "created": "2026-11-07T20:41:35+00:00",
+   "last_run": "2026-11-08T01:44+05:00"
+  },
+  {
+   "id": "G-2",
+   "title": "Daily Urdu Short on SFALI TEACHINGS",
+   "description": "One Urdu Short every day.",
+   "status": "paused",
+   "playbook": "youtube_daily",
+   "schedule": {
+    "every_days": 1,
+    "at_hour": 18
+   },
+   "params": {
+    "language": "ur",
+    "niche": "پروجیکٹ مینجمنٹ، ایجائل، اسکرم اور آئی ٹی کیریئر کے عملی مشورے",
+    "audience": "Urdu-speaking IT professionals and students in Pakistan",
+    "tone": "warm, practical, storytelling",
+    "target_seconds": 45,
+    "scenes": 6,
+    "captions": true,
+    "music_volume": 0.1,
+    "privacy": "public",
+    "youtube_token_secret": "YT_REFRESH_TOKEN"
+   },
+   "created": "2026-11-07T20:41:35+00:00",
+   "last_run": null
+  },
+  {
+   "id": "G-3",
+   "title": "Write 5 LinkedIn posts about Agile",
+   "description": "Practical posts for my LinkedIn profile",
+   "status": "active",
+   "playbook": null,
+   "params": {},
+   "schedule": null,
+   "created": "2026-11-07T20:44:07+00:00",
+   "last_run": null,
+   "planned": true
+  }
+ ],
+ "agents": [
+  {
+   "name": "Manager",
+   "title": "Team Manager",
+   "kind": "llm",
+   "provider": "gemini",
+   "model": "gemini-flash-latest",
+   "budget_usd": 2.0,
+   "emoji": "🧭",
+   "instructions": "You are the team manager. Break the CEO's goals into small, concrete tasks and assign each to the best-suited agent on the team. Keep plans short (2-6 tasks). Mark the final deliverable as needing CEO approval.",
+   "id": "manager",
+   "template": "manager",
+   "status": "active",
+   "reports_to": "ceo",
+   "hired": "2026-11-07T20:41:35+00:00"
+  },
+  {
+   "name": "Researcher",
+   "title": "Trend Researcher",
+   "kind": "llm",
+   "provider": "gemini",
+   "model": "gemini-flash-latest",
+   "budget_usd": 1.0,
+   "emoji": "🔎",
+   "instructions": "You research ideas and facts. Prefer specific, surprising, verifiable angles. Never invent statistics. Say clearly when something is uncertain.",
+   "id": "researcher",
+   "template": "researcher",
+   "status": "active",
+   "reports_to": "manager",
+   "hired": "2026-11-07T20:41:35+00:00"
+  },
+  {
+   "name": "Scriptwriter",
+   "title": "Shorts Scriptwriter",
+   "kind": "llm",
+   "provider": "claude",
+   "model": "claude-haiku-5-5",
+   "budget_usd": 3.0,
+   "emoji": "✍️",
+   "instructions": "You write YouTube Shorts scripts that hook in the first 2 seconds, use short spoken sentences, and end with a payoff. Only state facts you are confident are true.",
+   "id": "scriptwriter",
+   "template": "scriptwriter",
+   "status": "active",
+   "reports_to": "manager",
+   "hired": "2026-11-07T20:41:35+00:00"
+  },
+  {
+   "name": "Video Maker",
+   "title": "Video Editor",
+   "kind": "tool",
+   "tool": "shorts_render",
+   "budget_usd": 0.0,
+   "emoji": "🎬",
+   "instructions": "Turns an approved script into a 1080x1920 Short with voice, stock footage and captions.",
+   "id": "video_maker",
+   "template": "video_maker",
+   "status": "active",
+   "reports_to": "manager",
+   "hired": "2026-11-07T20:41:35+00:00"
+  },
+  {
+   "name": "Publisher",
+   "title": "Channel Publisher",
+   "kind": "tool",
+   "tool": "publish",
+   "budget_usd": 0.0,
+   "emoji": "🚀",
+   "instructions": "Uploads approved videos to YouTube, or sends you copy-ready text in manual mode.",
+   "id": "publisher",
+   "template": "publisher",
+   "status": "active",
+   "reports_to": "manager",
+   "hired": "2026-11-07T20:41:35+00:00"
+  },
+  {
+   "name": "Marketer",
+   "title": "Growth Marketer",
+   "kind": "llm",
+   "provider": "gemini",
+   "model": "gemini-flash-latest",
+   "budget_usd": 1.0,
+   "emoji": "📣",
+   "instructions": "You write titles, descriptions, hashtags, community posts and LinkedIn posts that are clear and honest. No clickbait that the content can't back up.",
+   "id": "marketer",
+   "template": "marketer",
+   "status": "active",
+   "reports_to": "manager",
+   "hired": "2026-11-07T20:41:35+00:00"
+  },
+  {
+   "name": "Writer",
+   "title": "Content Writer",
+   "kind": "llm",
+   "provider": "claude",
+   "model": "claude-haiku-5-5",
+   "budget_usd": 2.0,
+   "emoji": "📝",
+   "instructions": "You write clear, well-structured articles, emails, proposals and documents.",
+   "id": "writer",
+   "template": "writer",
+   "status": "active",
+   "reports_to": "ceo",
+   "hired": "2026-11-07T20:43:25+00:00"
+  }
+ ],
+ "tasks": [
+  {
+   "id": "T-1",
+   "title": "Pick today's English Short topic",
+   "description": "Niche: project management tips: Agile, Scrum, Jira, stakeholder management, PMP and real IT project lessons. Audience: project managers, team leads, PMP aspirants, IT professionals.",
+   "goal": "G-1",
+   "assignee": "researcher",
+   "status": "done",
+   "depends_on": [],
+   "needs_approval": false,
+   "format": "topic",
+   "priority": 2,
+   "run": "R-1",
+   "input": {},
+   "output": "Topic: **Scrum vs Kanban — how to choose in 45 seconds**",
+   "data": {
+    "topic": "Scrum vs Kanban — how to choose in 45 seconds",
+    "angle": "Most teams choose for the wrong reason",
+    "why": "Common confusion for new PMs"
+   },
+   "feedback": [],
+   "attempts": 1,
+   "created_by": "playbook",
+   "created": "2026-11-07T20:43:25+00:00",
+   "updated": "2026-11-07T20:43:25+00:00",
+   "cost_usd": 0.0,
+   "model_used": "gemini-flash-latest"
+  },
+  {
+   "id": "T-2",
+   "title": "Write the Short script",
+   "description": "Language: English. Tone: practical, confident, like a senior PM mentor.",
+   "goal": "G-1",
+   "assignee": "scriptwriter",
+   "status": "done",
+   "depends_on": [
+    "T-1"
+   ],
+   "needs_approval": false,
+   "format": "shorts_script",
+   "priority": 2,
+   "run": "R-1",
+   "input": {},
+   "output": "1. Most teams pick Scrum or Kanban for the wrong reason.\n2. Scrum works in fixed sprints, usually two weeks, with a clear goal for each sprint.\n3. Kanban has no sprints. Work flows continuously, and you limit how much is in progress.\n4. Choose Scrum when requirements change often and you need regular review points.\n5. Choose Kanban for support, operations or any work that arrives unpredictably.\n6. Many teams mix both. Start simple, then adjust. Follow for more PM tips.",
+   "data": {
+    "topic": "Scrum vs Kanban — how to choose in 45 seconds",
+    "title": "Scrum vs Kanban: Which One Fits Your Team?",
+    "description": "Scrum or Kanban? Here's the simple way to decide for your team.",
+    "tags": [
+     "scrum",
+     "kanban",
+     "agile",
+     "project management",
+     "pmp",
+     "jira",
+     "shorts"
+    ],
+    "scenes": [
+     {
+      "narration": "Most teams pick Scrum or Kanban for the wrong reason.",
+      "footage": [
+       "team meeting office",
+       "sticky notes board"
+      ]
+     },
+     {
+      "narration": "Scrum works in fixed sprints, usually two weeks, with a clear goal for each sprint.",
+      "footage": [
+       "calendar planning",
+       "team planning whiteboard"
+      ]
+     },
+     {
+      "narration": "Kanban has no sprints. Work flows continuously, and you limit how much is in progress.",
+      "footage": [
+       "conveyor belt factory",
+       "kanban board"
+      ]
+     },
+     {
+      "narration": "Choose Scrum when requirements change often and you need regular review points.",
+      "footage": [
+       "software developers laptop",
+       "team discussion"
+      ]
+     },
+     {
+      "narration": "Choose Kanban for support, operations or any work that arrives unpredictably.",
+      "footage": [
+       "help desk support",
+       "office phone call"
+      ]
+     },
+     {
+      "narration": "Many teams mix both. Start simple, then adjust. Follow for more PM tips.",
+      "footage": [
+       "team high five",
+       "success celebration office"
+      ]
+     }
+    ]
+   },
+   "feedback": [],
+   "attempts": 1,
+   "created_by": "playbook",
+   "created": "2026-11-07T20:43:25+00:00",
+   "updated": "2026-11-07T20:43:25+00:00",
+   "cost_usd": 0.0,
+   "model_used": "claude-haiku-5-5"
+  },
+  {
+   "id": "T-3",
+   "title": "Render the Short",
+   "description": "",
+   "goal": "G-1",
+   "assignee": "video_maker",
+   "status": "done",
+   "depends_on": [
+    "T-2"
+   ],
+   "needs_approval": true,
+   "format": null,
+   "priority": 2,
+   "run": "R-1",
+   "input": {},
+   "output": "🎬 **Scrum vs Kanban: Which One Fits Your Team?** — 44.6s (en)\n\nWaiting for your approval.",
+   "data": {
+    "id": "T-3-20261108-0143",
+    "language": "en",
+    "privacy": "public",
+    "topic": "Scrum vs Kanban — how to choose in 45 seconds",
+    "title": "Scrum vs Kanban: Which One Fits Your Team?",
+    "description": "Scrum or Kanban? Here's the simple way to decide for your team.\n\n#shorts",
+    "tags": [
+     "scrum",
+     "kanban",
+     "agile",
+     "project management",
+     "pmp",
+     "jira",
+     "shorts"
+    ],
+    "seconds": 44.6,
+    "video_id": "T-3-20261108-0143"
+   },
+   "feedback": [],
+   "attempts": 1,
+   "created_by": "playbook",
+   "created": "2026-11-07T20:43:25+00:00",
+   "updated": "2026-11-07T20:44:07+00:00",
+   "cost_usd": 0.0,
+   "approval_kind": "video"
+  },
+  {
+   "id": "T-4",
+   "title": "Publish the Short",
+   "description": "",
+   "goal": "G-1",
+   "assignee": "publisher",
+   "status": "done",
+   "depends_on": [
+    "T-3"
+   ],
+   "needs_approval": false,
+   "format": null,
+   "priority": 2,
+   "run": "R-1",
+   "input": {},
+   "output": "Sent 'Scrum vs Kanban: Which One Fits Your Team?' to you on Telegram to post manually.",
+   "data": {},
+   "feedback": [],
+   "attempts": 1,
+   "created_by": "playbook",
+   "created": "2026-11-07T20:43:25+00:00",
+   "updated": "2026-11-07T20:44:07+00:00",
+   "cost_usd": 0.0
+  },
+  {
+   "id": "T-5",
+   "title": "Plan: Write 5 LinkedIn posts about Agile",
+   "description": "Practical posts for my LinkedIn profile",
+   "goal": "G-3",
+   "assignee": "manager",
+   "status": "done",
+   "depends_on": [],
+   "needs_approval": false,
+   "format": "plan",
+   "priority": 1,
+   "run": null,
+   "input": {},
+   "output": "Plan: research pain points → write 5 posts (needs your approval)",
+   "data": {
+    "tasks": [
+     {
+      "title": "Research what Agile topics PMs engage with on LinkedIn",
+      "description": "Collect 5 key points",
+      "assignee": "researcher",
+      "depends_on": [],
+      "needs_approval": false
+     },
+     {
+      "title": "Write 5 LinkedIn posts about Agile",
+      "description": "Turn the research into the final piece",
+      "assignee": "writer",
+      "depends_on": [
+       0
+      ],
+      "needs_approval": true
+     }
+    ]
+   },
+   "feedback": [],
+   "attempts": 1,
+   "created_by": "system",
+   "created": "2026-11-07T20:44:07+00:00",
+   "updated": "2026-11-07T20:44:07+00:00",
+   "cost_usd": 0.0,
+   "model_used": "gemini-flash-latest"
+  },
+  {
+   "id": "T-6",
+   "title": "Research what Agile topics PMs engage with on LinkedIn",
+   "description": "Find 5 recurring pain points",
+   "goal": "G-3",
+   "assignee": "researcher",
+   "status": "done",
+   "depends_on": [],
+   "needs_approval": false,
+   "format": null,
+   "priority": 2,
+   "run": null,
+   "input": {},
+   "output": "- Stand-up fatigue\n- Bloated backlogs\n- Velocity misuse\n- Definition of Done\n- Retros with no follow-up",
+   "data": {},
+   "feedback": [],
+   "attempts": 1,
+   "created_by": "manager",
+   "created": "2026-11-07T20:44:07+00:00",
+   "updated": "2026-11-07T20:44:07+00:00",
+   "cost_usd": 0.0,
+   "model_used": "gemini-flash-latest"
+  },
+  {
+   "id": "T-7",
+   "title": "Write 5 LinkedIn posts about Agile",
+   "description": "Short, practical, one idea per post",
+   "goal": "G-3",
+   "assignee": "writer",
+   "status": "review",
+   "depends_on": [
+    "T-6"
+   ],
+   "needs_approval": true,
+   "format": null,
+   "priority": 2,
+   "run": null,
+   "input": {},
+   "output": "**Post 1 — Stand-ups are not status reports**\nIf your daily stand-up takes 30 minutes, it's a meeting about the meeting. Three questions, 15 minutes, blockers go to a parking lot.\n\n**Post 2 — The backlog is not a wishlist**\nA backlog with 400 items is a graveyard. Keep the top 20 refined; archive the rest every quarter.\n\n**Post 3 — Velocity is for planning, not judging**\nThe moment velocity becomes a KPI for managers, teams start inflating points. Use it only to forecast.\n\n**Post 4 — 'Done' needs a definition**\nHalf the arguments in sprint reviews disappear when the team agrees what Done means *before* the sprint starts.\n\n**Post 5 — Retros need one action, not ten**\nPick one improvement, give it an owner and a date, and check it at the next retro.",
+   "data": {},
+   "feedback": [],
+   "attempts": 1,
+   "created_by": "manager",
+   "created": "2026-11-07T20:44:07+00:00",
+   "updated": "2026-11-07T20:44:07+00:00",
+   "cost_usd": 0.0,
+   "model_used": "claude-haiku-5-5"
+  },
+  {
+   "id": "T-8",
+   "title": "Pick today's English Short topic",
+   "description": "Niche: project management tips: Agile, Scrum, Jira, stakeholder management, PMP and real IT project lessons. Audience: project managers, team leads, PMP aspirants, IT professionals.",
+   "goal": "G-1",
+   "assignee": "researcher",
+   "status": "done",
+   "depends_on": [],
+   "needs_approval": false,
+   "format": "topic",
+   "priority": 2,
+   "run": "R-2",
+   "input": {},
+   "output": "Topic: **Scrum vs Kanban — how to choose in 45 seconds**",
+   "data": {
+    "topic": "Scrum vs Kanban — how to choose in 45 seconds",
+    "angle": "Most teams choose for the wrong reason",
+    "why": "Common confusion for new PMs"
+   },
+   "feedback": [],
+   "attempts": 1,
+   "created_by": "playbook",
+   "created": "2026-11-07T20:44:07+00:00",
+   "updated": "2026-11-07T20:44:07+00:00",
+   "cost_usd": 0.0,
+   "model_used": "gemini-flash-latest"
+  },
+  {
+   "id": "T-9",
+   "title": "Write the Short script",
+   "description": "Language: English. Tone: practical, confident, like a senior PM mentor.",
+   "goal": "G-1",
+   "assignee": "scriptwriter",
+   "status": "done",
+   "depends_on": [
+    "T-8"
+   ],
+   "needs_approval": false,
+   "format": "shorts_script",
+   "priority": 2,
+   "run": "R-2",
+   "input": {},
+   "output": "1. Most teams pick Scrum or Kanban for the wrong reason.\n2. Scrum works in fixed sprints, usually two weeks, with a clear goal for each sprint.\n3. Kanban has no sprints. Work flows continuously, and you limit how much is in progress.\n4. Choose Scrum when requirements change often and you need regular review points.\n5. Choose Kanban for support, operations or any work that arrives unpredictably.\n6. Many teams mix both. Start simple, then adjust. Follow for more PM tips.",
+   "data": {
+    "topic": "Scrum vs Kanban — how to choose in 45 seconds",
+    "title": "Scrum vs Kanban: Which One Fits Your Team?",
+    "description": "Scrum or Kanban? Here's the simple way to decide for your team.",
+    "tags": [
+     "scrum",
+     "kanban",
+     "agile",
+     "project management",
+     "pmp",
+     "jira",
+     "shorts"
+    ],
+    "scenes": [
+     {
+      "narration": "Most teams pick Scrum or Kanban for the wrong reason.",
+      "footage": [
+       "team meeting office",
+       "sticky notes board"
+      ]
+     },
+     {
+      "narration": "Scrum works in fixed sprints, usually two weeks, with a clear goal for each sprint.",
+      "footage": [
+       "calendar planning",
+       "team planning whiteboard"
+      ]
+     },
+     {
+      "narration": "Kanban has no sprints. Work flows continuously, and you limit how much is in progress.",
+      "footage": [
+       "conveyor belt factory",
+       "kanban board"
+      ]
+     },
+     {
+      "narration": "Choose Scrum when requirements change often and you need regular review points.",
+      "footage": [
+       "software developers laptop",
+       "team discussion"
+      ]
+     },
+     {
+      "narration": "Choose Kanban for support, operations or any work that arrives unpredictably.",
+      "footage": [
+       "help desk support",
+       "office phone call"
+      ]
+     },
+     {
+      "narration": "Many teams mix both. Start simple, then adjust. Follow for more PM tips.",
+      "footage": [
+       "team high five",
+       "success celebration office"
+      ]
+     }
+    ]
+   },
+   "feedback": [],
+   "attempts": 1,
+   "created_by": "playbook",
+   "created": "2026-11-07T20:44:07+00:00",
+   "updated": "2026-11-07T20:44:07+00:00",
+   "cost_usd": 0.0,
+   "model_used": "claude-haiku-5-5"
+  },
+  {
+   "id": "T-10",
+   "title": "Render the Short",
+   "description": "",
+   "goal": "G-1",
+   "assignee": "video_maker",
+   "status": "review",
+   "depends_on": [
+    "T-9"
+   ],
+   "needs_approval": true,
+   "format": null,
+   "priority": 2,
+   "run": "R-2",
+   "input": {},
+   "output": "🎬 **Scrum vs Kanban: Which One Fits Your Team?** — 44.6s (en)\n\nWaiting for your approval.",
+   "data": {
+    "id": "T-10-20261108-0144",
+    "language": "en",
+    "privacy": "public",
+    "topic": "Scrum vs Kanban — how to choose in 45 seconds",
+    "title": "Scrum vs Kanban: Which One Fits Your Team?",
+    "description": "Scrum or Kanban? Here's the simple way to decide for your team.\n\n#shorts",
+    "tags": [
+     "scrum",
+     "kanban",
+     "agile",
+     "project management",
+     "pmp",
+     "jira",
+     "shorts"
+    ],
+    "seconds": 44.6,
+    "video_id": "T-10-20261108-0144"
+   },
+   "feedback": [],
+   "attempts": 1,
+   "created_by": "playbook",
+   "created": "2026-11-07T20:44:07+00:00",
+   "updated": "2026-11-07T20:44:47+00:00",
+   "cost_usd": 0.0,
+   "approval_kind": "video"
+  },
+  {
+   "id": "T-11",
+   "title": "Publish the Short",
+   "description": "",
+   "goal": "G-1",
+   "assignee": "publisher",
+   "status": "todo",
+   "depends_on": [
+    "T-10"
+   ],
+   "needs_approval": false,
+   "format": null,
+   "priority": 2,
+   "run": "R-2",
+   "input": {},
+   "output": null,
+   "data": {},
+   "feedback": [],
+   "attempts": 0,
+   "created_by": "playbook",
+   "created": "2026-11-07T20:44:07+00:00",
+   "updated": "2026-11-07T20:44:07+00:00",
+   "cost_usd": 0.0
+  }
+ ],
+ "approvals": [
+  {
+   "id": "A-1",
+   "task": "T-3",
+   "kind": "video",
+   "title": "Render the Short",
+   "agent": "video_maker",
+   "status": "approved",
+   "created": "2026-11-07T20:44:07+00:00",
+   "telegram_msg": 0,
+   "preview": "🎬 **Scrum vs Kanban: Which One Fits Your Team?** — 44.6s (en)\n\nWaiting for your approval.",
+   "decided": "2026-11-07T20:44:07+00:00",
+   "note": ""
+  },
+  {
+   "id": "A-2",
+   "task": "T-7",
+   "kind": "deliverable",
+   "title": "Write 5 LinkedIn posts about Agile",
+   "agent": "writer",
+   "status": "pending",
+   "created": "2026-11-07T20:44:07+00:00",
+   "telegram_msg": 0,
+   "preview": "**Post 1 — Stand-ups are not status reports**\nIf your daily stand-up takes 30 minutes, it's a meeting about the meeting. Three questions, 15 minutes, blockers go to a parking lot.\n\n**Post 2 — The backlog is not a wishlist**\nA backlog with 400 items is a graveyard. Keep the top 20 refined; archive the rest every quarter.\n\n**Post 3 — Velocity is for planning, not judging**\nThe moment velocity becomes a KPI for managers, teams start inflating points. Use it only to forecast.\n\n**Post 4 — 'Done' needs a definition**\nHalf the arguments in sprint reviews disappear when the team agrees what Done means *before* the sprint starts.\n\n**Post 5 — Retros need one action, not ten**\nPick one improvement, give it an owner and a date, and check it at the next retro."
+  },
+  {
+   "id": "A-3",
+   "task": "T-10",
+   "kind": "video",
+   "title": "Render the Short",
+   "agent": "video_maker",
+   "status": "pending",
+   "created": "2026-11-07T20:44:47+00:00",
+   "telegram_msg": 0,
+   "preview": "🎬 **Scrum vs Kanban: Which One Fits Your Team?** — 44.6s (en)\n\nWaiting for your approval."
+  }
+ ],
+ "activity": [
+  {
+   "t": "2026-11-07T20:41:35+00:00",
+   "agent": "system",
+   "type": "system",
+   "text": "Company created. Welcome, CEO!"
+  },
+  {
+   "t": "2026-11-07T20:43:25+00:00",
+   "agent": "ceo",
+   "type": "ceo",
+   "text": "Hired 📝 Writer as 'writer'  [dashboard]"
+  },
+  {
+   "t": "2026-11-07T20:43:25+00:00",
+   "agent": "system",
+   "type": "system",
+   "text": "Goal G-1 'Daily English Short on SFALI TEACHINGS': started run R-1"
+  },
+  {
+   "t": "2026-11-07T20:43:25+00:00",
+   "agent": "researcher",
+   "type": "run",
+   "text": "T-1 'Pick today's English Short topic' done · gemini-flash-latest · 0+0 tokens · $0.0000"
+  },
+  {
+   "t": "2026-11-07T20:43:25+00:00",
+   "agent": "scriptwriter",
+   "type": "run",
+   "text": "T-2 'Write the Short script' done · gemini-flash-latest · 0+0 tokens · $0.0000"
+  },
+  {
+   "t": "2026-11-07T20:44:07+00:00",
+   "agent": "video_maker",
+   "type": "run",
+   "text": "T-3 rendered 'Scrum vs Kanban: Which One Fits Your Team?' (44.6s)"
+  },
+  {
+   "t": "2026-11-07T20:44:07+00:00",
+   "agent": "video_maker",
+   "type": "approval",
+   "text": "T-3 waiting for CEO approval (A-1)"
+  },
+  {
+   "t": "2026-11-07T20:44:07+00:00",
+   "agent": "system",
+   "type": "heartbeat",
+   "text": "Heartbeat: 1 commands, 1 runs started, 3 tasks worked"
+  },
+  {
+   "t": "2026-11-07T20:44:07+00:00",
+   "agent": "ceo",
+   "type": "ceo",
+   "text": "✅ Approved A-1 (Render the Short)  [dashboard]"
+  },
+  {
+   "t": "2026-11-07T20:44:07+00:00",
+   "agent": "publisher",
+   "type": "run",
+   "text": "Sent 'Scrum vs Kanban: Which One Fits Your Team?' to you on Telegram to post manually."
+  },
+  {
+   "t": "2026-11-07T20:44:07+00:00",
+   "agent": "system",
+   "type": "heartbeat",
+   "text": "Heartbeat: 1 commands, 0 runs started, 1 tasks worked"
+  },
+  {
+   "t": "2026-11-07T20:44:07+00:00",
+   "agent": "ceo",
+   "type": "ceo",
+   "text": "New goal G-3: Write 5 LinkedIn posts about Agile  [dashboard]"
+  },
+  {
+   "t": "2026-11-07T20:44:07+00:00",
+   "agent": "manager",
+   "type": "run",
+   "text": "Planned 2 tasks for goal G-3: T-6, T-7"
+  },
+  {
+   "t": "2026-11-07T20:44:07+00:00",
+   "agent": "manager",
+   "type": "run",
+   "text": "T-5 'Plan: Write 5 LinkedIn posts about Agile' done · gemini-flash-latest · 0+0 tokens · $0.0000"
+  },
+  {
+   "t": "2026-11-07T20:44:07+00:00",
+   "agent": "researcher",
+   "type": "run",
+   "text": "T-6 'Research what Agile topics PMs engage with on LinkedIn' done · gemini-flash-latest · 0+0 tokens · $0.0000"
+  },
+  {
+   "t": "2026-11-07T20:44:07+00:00",
+   "agent": "writer",
+   "type": "run",
+   "text": "T-7 'Write 5 LinkedIn posts about Agile' done · gemini-flash-latest · 0+0 tokens · $0.0000"
+  },
+  {
+   "t": "2026-11-07T20:44:07+00:00",
+   "agent": "writer",
+   "type": "approval",
+   "text": "T-7 waiting for CEO approval (A-2)"
+  },
+  {
+   "t": "2026-11-07T20:44:07+00:00",
+   "agent": "system",
+   "type": "heartbeat",
+   "text": "Heartbeat: 1 commands, 0 runs started, 3 tasks worked"
+  },
+  {
+   "t": "2026-11-07T20:44:07+00:00",
+   "agent": "system",
+   "type": "system",
+   "text": "Goal G-1 'Daily English Short on SFALI TEACHINGS': started run R-2"
+  },
+  {
+   "t": "2026-11-07T20:44:07+00:00",
+   "agent": "ceo",
+   "type": "ceo",
+   "text": "Started goal G-1 now  [dashboard]"
+  },
+  {
+   "t": "2026-11-07T20:44:07+00:00",
+   "agent": "researcher",
+   "type": "run",
+   "text": "T-8 'Pick today's English Short topic' done · gemini-flash-latest · 0+0 tokens · $0.0000"
+  },
+  {
+   "t": "2026-11-07T20:44:07+00:00",
+   "agent": "scriptwriter",
+   "type": "run",
+   "text": "T-9 'Write the Short script' done · gemini-flash-latest · 0+0 tokens · $0.0000"
+  },
+  {
+   "t": "2026-11-07T20:44:47+00:00",
+   "agent": "video_maker",
+   "type": "run",
+   "text": "T-10 rendered 'Scrum vs Kanban: Which One Fits Your Team?' (44.6s)"
+  },
+  {
+   "t": "2026-11-07T20:44:47+00:00",
+   "agent": "video_maker",
+   "type": "approval",
+   "text": "T-10 waiting for CEO approval (A-3)"
+  },
+  {
+   "t": "2026-11-07T20:44:47+00:00",
+   "agent": "system",
+   "type": "heartbeat",
+   "text": "Heartbeat: 1 commands, 0 runs started, 3 tasks worked"
+  }
+ ],
+ "usage": {
+  "month": "2026-11",
+  "by_agent": {
+   "researcher": {
+    "usd": 0.0,
+    "in": 4200,
+    "out": 900,
+    "runs": 3
+   },
+   "scriptwriter": {
+    "usd": 0.41,
+    "in": 21000,
+    "out": 6800,
+    "runs": 3
+   },
+   "manager": {
+    "usd": 0.0,
+    "in": 3100,
+    "out": 700,
+    "runs": 1
+   },
+   "writer": {
+    "usd": 0.27,
+    "in": 9800,
+    "out": 4100,
+    "runs": 1
+   },
+   "video_maker": {
+    "usd": 0,
+    "in": 0,
+    "out": 0,
+    "runs": 2
+   },
+   "publisher": {
+    "usd": 0,
+    "in": 0,
+    "out": 0,
+    "runs": 1
+   }
+  },
+  "total_usd": 0.68
+ },
+ "counters": {
+  "task": 11,
+  "approval": 3,
+  "goal": 3,
+  "run": 2
+ },
+ "last_heartbeat": "2026-11-07T20:44:47+00:00",
+ "demo": true,
+ "chat": [
+  {
+   "id": "M-1",
+   "t": "2026-11-08T10:11:50+00:00",
+   "from": "system",
+   "text": "🔔 Notifications are on for this device. I'll ping you when something needs your OK."
+  },
+  {
+   "id": "M-2",
+   "t": "2026-11-08T10:46:50+00:00",
+   "from": "ceo",
+   "text": "Write 5 LinkedIn posts about Agile"
+  },
+  {
+   "id": "M-3",
+   "t": "2026-11-08T10:48:50+00:00",
+   "from": "manager",
+   "text": "Great idea — I'll have the Researcher find what PMs struggle with, then the Writer will draft 5 short posts for your review.\n\n✅ New goal G-3: Write 5 LinkedIn posts about Agile"
+  },
+  {
+   "id": "M-4",
+   "t": "2026-11-08T10:54:50+00:00",
+   "from": "writer",
+   "approval": "A-2",
+   "task": "T-7",
+   "text": "🗂 <b>Needs your approval</b> · A-2\n<b>Write 5 LinkedIn posts about Agile</b>\n\n**Post 1 — Stand-ups are not status reports**\nIf your daily stand-up takes 30 minutes, it's a meeting about the meeting…"
+  },
+  {
+   "id": "M-5",
+   "t": "2026-11-08T11:26:50+00:00",
+   "from": "ceo",
+   "text": "Make a Short about Scrum vs Kanban"
+  },
+  {
+   "id": "M-6",
+   "t": "2026-11-08T11:27:50+00:00",
+   "from": "manager",
+   "text": "On it! Starting the YouTube team now — you'll get the video here in a few minutes.\n\n✅ Started a new Short for 'Daily English Short on SFALI TEACHINGS' about: Scrum vs Kanban"
+  },
+  {
+   "id": "M-7",
+   "t": "2026-11-08T11:32:50+00:00",
+   "from": "video_maker",
+   "approval": "A-3",
+   "task": "T-10",
+   "video": "T-10-20261108-0144",
+   "text": "🎬 <b>Scrum vs Kanban: Which One Fits Your Team?</b>\n44.6s · en\n📝 Scrum vs Kanban — how to choose in 45 seconds"
+  },
+  {
+   "id": "M-8",
+   "t": "2026-11-08T11:43:50+00:00",
+   "from": "ceo",
+   "text": "What's pending?"
+  },
+  {
+   "id": "M-9",
+   "t": "2026-11-08T11:44:50+00:00",
+   "from": "manager",
+   "text": "Two things need your OK: the Scrum vs Kanban Short and the LinkedIn posts. Everything else is on track.\n\n📊 <b>SFALI Teachings HQ</b>\nWaiting for you: <b>2</b>\nAI spend this month: $0.68 of $10"
+  }
+ ]
+}
