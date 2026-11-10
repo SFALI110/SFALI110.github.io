@@ -155,12 +155,15 @@ body.chatmode #composer{display:block}
 <main id="main"></main>
 <div id="composer"><div class="in">
   <div class="chips">
+    <button type="button" onclick="prefill('@pm ')">💼 @pm</button>
+    <button type="button" onclick="prefill('@ai ')">🤖 @ai</button>
+    <button type="button" onclick="prefill('@urdu ')">🇵🇰 @urdu</button>
     <button type="button" onclick="quick('What is pending?')">⏳ What's pending?</button>
     <button type="button" onclick="quick('/short')">🎬 Make a Short now</button>
     <button type="button" onclick="quick('How much have we spent this month?')">💸 Spending</button>
     <button type="button" onclick="quick('/help')">❓ Help</button>
   </div>
-  <form id="chatForm"><textarea id="chatIn" rows="1" placeholder="Message your Manager…"></textarea><button class="send" title="Send">➤</button></form>
+  <form id="chatForm"><textarea id="chatIn" rows="1" placeholder="Message your team… (@pm @ai @urdu)"></textarea><button class="send" title="Send">➤</button></form>
 </div></div>
 
 <div class="modal" id="modal"><div class="sheet" id="sheet"></div></div>
@@ -253,11 +256,33 @@ async function load() {
         const runs = await gh(`/repos/${cfg.repo}/actions/workflows/heartbeat.yml/runs?per_page=1`);
         lastRun = runs.workflow_runs?.[0] || null;
       } catch { lastRun = null; }
+      loadMinutes();
     }
     if (!videoPlaying()) render();
   } catch (e) {
     $("#main").innerHTML = `<div class="banner">Could not load your company: ${esc(e.message)}<br>Check the repo name and token in ⚙ Settings.</div>`;
   }
+}
+
+/* GitHub Actions minutes used this month (private repos get 2,000 free) */
+let minutes = LS.get("minutes", null);
+async function loadMinutes() {
+  if (minutes && Date.now() - minutes.at < 15 * 60000) return;
+  try {
+    const now = new Date(), month = now.toISOString().slice(0, 7);
+    let total = 0, page = 1, more = true;
+    while (more && page <= 10) {
+      const r = await gh(`/repos/${cfg.repo}/actions/runs?per_page=100&page=${page}&created=%3E%3D${month}-01`);
+      for (const run of r.workflow_runs || []) {
+        if (run.status !== "completed" || !run.run_started_at) continue;
+        const secs = (new Date(run.updated_at) - new Date(run.run_started_at)) / 1000;
+        total += Math.max(1, Math.ceil(secs / 60));
+      }
+      more = (r.workflow_runs || []).length === 100; page++;
+    }
+    minutes = { used: total, month, at: Date.now() }; LS.set("minutes", minutes);
+    if (view() === "overview") render();
+  } catch {}
 }
 
 async function send(cmd, label, silent) {
@@ -332,12 +357,21 @@ function overview() {
     <div class="card kpi"><small>Open tasks</small><b>${open}</b>${blocked ? `<div class="small" style="color:var(--bad)">${blocked} blocked</div>` : ""}</div>
     <div class="card kpi"><small>Active agents</small><b>${act}</b><div class="small muted">of ${S.agents.filter(a => a.status !== "fired").length}</div></div>
     <div class="card kpi"><small>AI spend · ${esc(u.month || "")}</small><b>${money(spent)}</b><div class="small muted">limit ${money(cap)}</div><div class="bar"><i class="${pct > 90 ? "full" : pct > 70 ? "hot" : ""}" style="width:${pct}%"></i></div></div>
+    ${minutesTile()}
   </div>
+  ${minutes && minutes.used >= 1600 ? `<div class="banner" style="margin-top:12px">⏱ You've used ${minutes.used} of 2,000 free GitHub minutes this month. To stay free: pause a channel, or make the AI-Agents repo public (unlimited minutes).</div>` : ""}
   <div class="card" style="margin-top:12px"><div class="small muted">Mission</div><div>${esc(S.company.mission)}</div></div>
   <h2>Waiting for your decision</h2>
   <div class="card">${ap.length ? ap.map(apCard).join("") : `<div class="empty">Nothing waiting. Your team is on it ✨</div>`}</div>
   <h2>Recent activity</h2>
   <div class="card">${actList(S.activity.slice(-8).reverse())}</div>`;
+}
+
+function minutesTile() {
+  if (demo) return `<div class="card kpi"><small>GitHub minutes · free 2,000</small><b>640</b><div class="bar"><i style="width:32%"></i></div></div>`;
+  if (!minutes) return `<div class="card kpi"><small>GitHub minutes</small><b>…</b><div class="small muted">counting</div></div>`;
+  const p = Math.min(100, minutes.used / 20);
+  return `<div class="card kpi"><small>GitHub minutes · free 2,000</small><b>${minutes.used}</b><div class="small muted">this month (approx.)</div><div class="bar"><i class="${p > 90 ? "full" : p > 75 ? "hot" : ""}" style="width:${p}%"></i></div></div>`;
 }
 
 function approvals() {
@@ -398,7 +432,8 @@ function goals() {
     const pb = g.playbook === "youtube_daily" ? `🎬 Daily Short · ${esc(g.params?.language === "ur" ? "Urdu" : "English")} · every ${g.schedule?.every_days || 1} day(s) at ${g.schedule?.at_hour ?? 9}:00 PKT` : "🧭 Planned by the Manager";
     return `<div class="item"><div class="row"><span class="pill ${g.status === "active" ? "ok" : g.status === "done" ? "acc" : "warn"}">${esc(g.status)}</span><b${rtl(g.title)}>${esc(g.title)}</b><span class="muted small">${esc(g.id)}</span></div>
       <div class="small muted" style="margin-top:4px">${pb}${g.last_run ? " · last run " + esc(g.last_run.replace("T", " ")) : ""}</div>
-      <div class="small muted">${done}/${ts.length} tasks done</div>
+      <div class="small muted">${done}/${ts.length} tasks done${g.params?.lead ? " · team: " + aname(g.params.lead) : ""}</div>
+      ${g.notes?.length ? `<details style="margin-top:6px"><summary class="small muted">📝 Your notes this team follows (${g.notes.length})</summary><ul class="small">${g.notes.map(n => `<li>${esc(n)}</li>`).join("")}</ul></details>` : ""}
       <div class="row" style="margin-top:8px">${g.playbook && g.status === "active" ? `<button class="btn sm" onclick="send({type:'run_goal_now',id:'${g.id}'},'Starting now')">▶ Run now</button>` : ""}
       ${g.status === "active" ? `<button class="btn sm" onclick="send({type:'update_goal',id:'${g.id}',status:'paused'},'Pausing goal')">Pause</button>` : g.status === "paused" ? `<button class="btn sm" onclick="send({type:'update_goal',id:'${g.id}',status:'active'},'Activating goal')">Activate</button>` : ""}
       <button class="btn sm" onclick="LS.set('fGoal','${g.id}');location.hash='#board'">View tasks</button></div></div>`;
@@ -503,6 +538,7 @@ async function sendChat(text) {
   await send({ type: "chat", text }, null, true);
   fastPoll();
 }
+function prefill(t) { const i = $("#chatIn"); i.value = t; i.focus(); }
 function quick(t) { if (t === "/short") return sendChat("/short"); sendChat(t); }
 let fastTimer = null;
 function fastPoll(n = 0) { clearTimeout(fastTimer); if (n > 20) return; fastTimer = setTimeout(async () => { await load(); if (outbox.length) fastPoll(n + 1); }, n < 3 ? 25000 : 12000); }
