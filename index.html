@@ -191,6 +191,12 @@ svg.i{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stro
 .copy{align-self:flex-start;margin-top:8px;min-height:42px;padding:0 18px;border-radius:999px;border:0;background:var(--teal);color:var(--bg3);font:500 15px var(--font);cursor:pointer;display:inline-flex;align-items:center;gap:8px}
 .copy:hover{background:var(--mint)}
 
+.photo{margin:0;justify-self:center;width:100%;max-width:420px;aspect-ratio:3/4;border-radius:80px 16px 80px 16px;overflow:hidden;border:2px solid var(--teal);box-shadow:-12px 12px 0 rgb(46 242 208/.18),0 24px 60px rgb(0 0 0/.4)}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.xtop{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:20px;margin-bottom:20px}
+.art{margin:0;border-radius:18px;overflow:hidden;background:#0e131b;border:1px solid var(--line);display:grid;place-items:center}
+.art img{width:100%;height:auto;display:block}
+@media(max-width:860px){.xtop{grid-template-columns:1fr}}
 footer{background:var(--bg3);border-top:1px solid var(--line);font-size:14px;color:var(--soft)}
 footer .in{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-block:22px}
 footer .fs{display:flex;gap:10px}
@@ -222,8 +228,7 @@ footer .fs a{width:34px;height:34px;border-radius:50%;display:grid;place-items:c
   <div class="big">Project Manager</div>
   <div class="hgrid">
     <div class="pcard">
-      <!-- To add your photo: put photo.jpg next to index.html and replace "SFA" below with <img src="photo.jpg" alt="Syed Faizan Ali"> -->
-      <div class="avatar">SFA</div>
+      <div class="avatar"><img src="images/avatar.jpg" alt="Syed Faizan Ali" width="104" height="104"></div>
       <h3>Faizan Ali</h3>
       <div class="sub">Senior IT Project Manager</div>
       <ul class="info">
@@ -264,16 +269,7 @@ footer .fs a{width:34px;height:34px;border-radius:50%;display:grid;place-items:c
           <p>Today I lead digital transformation at EFU Life Assurance, from mobile apps and customer portals to claims and onboarding digitalization.</p>
         </div>
       </div>
-      <div class="road" aria-label="Career roadmap, 2013 to today">
-        <h3>Career roadmap</h3>
-        <div class="note">Jun 2013 → today</div>
-        <div class="r"><div class="lab">EFU Life<small>Project Manager</small></div><div class="track"><div class="bar now" style="--l:10.92;--w:2.98"></div></div></div>
-        <div class="r"><div class="lab">Galaxy S&amp;T<small>Coordinator</small></div><div class="track"><div class="bar" style="--l:10.42;--w:.5"></div></div></div>
-        <div class="r"><div class="lab">Merchant<small>Project Manager</small></div><div class="track"><div class="bar" style="--l:9;--w:1.42"></div></div></div>
-        <div class="r"><div class="lab">Lucky Cement<small>Sr. Asst. Mgr IT</small></div><div class="track"><div class="bar" style="--l:.42;--w:8.58"></div></div></div>
-        <div class="r"><div class="lab">Degrees<small>BS CS · MPM</small></div><div class="track"><div class="deg" style="--l:.35" title="BS Computer Science, 2013"></div><div class="deg" style="--l:9.5" title="Master of Project Management, 2022"></div></div></div>
-        <div class="axis"><div></div><div class="yrs"><span>’13</span><span>’14</span><span>’15</span><span>’16</span><span>’17</span><span>’18</span><span>’19</span><span>’20</span><span>’21</span><span>’22</span><span>’23</span><span>’24</span><span>’25</span><span>’26</span></div></div>
-      </div>
+      <figure class="photo"><img src="images/about.jpg" alt="Syed Faizan Ali at work on his laptop" width="840" height="1120" loading="lazy"></figure>
     </div>
   </div>
 </section>
@@ -306,6 +302,19 @@ footer .fs a{width:34px;height:34px;border-radius:50%;display:grid;place-items:c
   <div class="in">
     <div class="cue" aria-hidden="true"><svg viewBox="0 0 22 32" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="1" width="20" height="30" rx="10"/><path d="M11 7v6"/></svg><i></i><b></b></div>
     <div class="stitle"><h2>Experience</h2><span class="rule"></span><p>12+ years across four organisations</p></div>
+    <div class="xtop">
+      <figure class="art"><img src="images/years.jpg" alt="12+ years of experience" width="900" height="462" loading="lazy"></figure>
+      <div class="road" aria-label="Career roadmap, 2013 to today">
+        <h3>Career roadmap</h3>
+        <div class="note">Jun 2013 → today</div>
+        <div class="r"><div class="lab">EFU Life<small>Project Manager</small></div><div class="track"><div class="bar now" style="--l:10.92;--w:2.98"></div></div></div>
+        <div class="r"><div class="lab">Galaxy S&amp;T<small>Coordinator</small></div><div class="track"><div class="bar" style="--l:10.42;--w:.5"></div></div></div>
+        <div class="r"><div class="lab">Merchant<small>Project Manager</small></div><div class="track"><div class="bar" style="--l:9;--w:1.42"></div></div></div>
+        <div class="r"><div class="lab">Lucky Cement<small>Sr. Asst. Mgr IT</small></div><div class="track"><div class="bar" style="--l:.42;--w:8.58"></div></div></div>
+        <div class="r"><div class="lab">Degrees<small>BS CS · MPM</small></div><div class="track"><div class="deg" style="--l:.35" title="BS Computer Science, 2013"></div><div class="deg" style="--l:9.5" title="Master of Project Management, 2022"></div></div></div>
+        <div class="axis"><div></div><div class="yrs"><span>’13</span><span>’14</span><span>’15</span><span>’16</span><span>’17</span><span>’18</span><span>’19</span><span>’20</span><span>’21</span><span>’22</span><span>’23</span><span>’24</span><span>’25</span><span>’26</span></div></div>
+      </div>
+    </div>
     <div class="xp">
       <div class="job cur"><div class="jh"><h3>Project Manager</h3><span class="when">Dec 2023 – Present</span></div><div class="org">EFU Life Assurance Ltd. · Karachi</div>
         <ul><li>Lead end-to-end delivery of digital transformation and business application projects.</li><li>Manage scope, timelines, resources, budgets, risks and deliverables across multiple initiatives.</li><li>Own BRDs, charters, plans and status reports; administer Jira and run Agile ceremonies.</li><li>Manage UAT, API testing and defect tracking; support internal and external IT audits.</li></ul></div>
