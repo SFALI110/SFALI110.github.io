@@ -2,330 +2,380 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-29qMJ5Ha2cWI32P/wVYAL4s8NBsEENR4oUAWypVttbc='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-RvvGwS/lf56PE+31NQr6uH4B9aXPKEjvsspeVMh8KWU='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Syed Faizan Ali</title>
 <meta name="description" content="Syed Faizan Ali, Senior IT Project Manager in Karachi. 12+ years of digital transformation, PMO governance and agile delivery across insurance, IT services and manufacturing.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&family=Ubuntu+Mono:wght@400;700&display=swap">
 <style>
-/* VOICE: calm, senior, precise; a PM who reports clearly.
-   IDEA: the page behaves like a programme plan: a roadmap, a delivery board, a delivery method.
-   PICTURE: a glowing career roadmap (Gantt) on a deep-sea ground beside the name; then the project board.
-   COLOUR and TYPE: deep sea ground, sky for delivered work, signal pink for "now"; Hanken Grotesk light for display, regular for text.
-   LAYOUT: tall deep-sea hero (pitch | roadmap) on a shared year axis, then light bands, deep-sea contact band to close. */
-:root{color-scheme:light dark;
-  --sea:#0a2540;--sea2:#0f3157;--sky:#8fd3ff;--pink:#ff5c8a;--white:#ffffff;
-  --bg:light-dark(#ffffff,#06182b);--ink:light-dark(#0a2540,#e8f1fa);--soft:light-dark(#4a5d72,#9fb4c9);
-  --line:light-dark(#e2e9f0,#1b3550);--tint:light-dark(#f3f7fb,#0b2138);--card:light-dark(#ffffff,#10294a);
-  --skyInk:light-dark(#0b5f93,#8fd3ff);--skyTint:light-dark(#e3f3fd,#123a5c);
-  --font:"Hanken Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif}
-:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+/* VOICE: friendly, confident, senior; adapted from the JohannLeon community template.
+   IDEA: the template's dark studio, retold as a project manager's workspace (board glyphs, roadmap, sprint words) instead of code.
+   PICTURE: profile card + greeting + stats pill in the hero; a teal career roadmap beside About.
+   COLOUR and TYPE: single committed dark theme, slate grounds with one teal; Ubuntu for everything, Ubuntu Mono for small labels.
+   LAYOUT: full-width bands separated by the template's mouse-and-dotted-line cue, centred section titles with a dotted rule. */
+:root{color-scheme:dark;
+  --bg:#2a2f37;--bg2:#22262d;--bg3:#1b1f24;--card:#323843;--line:#3c4350;
+  --ink:#eef3f6;--soft:#a9b4bf;--teal:#2ef2d0;--tealDim:#1fbfa5;--mint:#9df5e6;
+  --font:"Ubuntu",system-ui,"Segoe UI",sans-serif;--mono:"Ubuntu Mono",ui-monospace,Consolas,monospace}
 *{box-sizing:border-box;min-width:0}
-html{scroll-behavior:smooth;scroll-padding-top:20px}
+html{scroll-behavior:smooth;scroll-padding-top:16px}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
 body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 var(--font);overflow-x:clip}
 a{color:inherit}
-:focus-visible{outline:3px solid var(--sky);outline-offset:3px;border-radius:6px}
-.in{max-width:1240px;margin:0 auto;padding-inline:max(5vw,16px)}
-h1,h2,h3{line-height:1.05;text-wrap:balance;margin:0}
-h2{font-size:clamp(32px,4vw,48px);font-weight:300;letter-spacing:-.02em}
-h2 b{font-weight:600}
-h3{font-size:20px;font-weight:600;line-height:1.25}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:6px}
+.in{max-width:1200px;margin:0 auto;padding-inline:max(5vw,16px)}
+h1,h2,h3{margin:0;line-height:1.1;text-wrap:balance}
 p{margin:0}
-.kicker{font-size:15px;font-weight:600;color:var(--skyInk);margin-bottom:10px}
+.t{color:var(--teal)}
+svg.i{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+/* top bar */
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:22px;border-bottom:1px solid var(--line)}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-size:20px;font-weight:500}
+.logo span{font-family:var(--mono);font-weight:700;color:var(--teal)}
+.menu{display:flex;gap:4px;flex-wrap:wrap}
+.menu a{text-decoration:none;padding:10px 12px;border-radius:8px;color:var(--soft);font-size:16px}
+.menu a:hover,.menu a.on{color:var(--teal)}
+.social{display:flex;gap:14px;flex-wrap:wrap}
+.social a{display:inline-flex;align-items:center;gap:6px;text-decoration:none;font:14px var(--mono);color:var(--soft);padding:8px 0}
+.social a:hover{color:var(--teal)}
+@media(max-width:900px){.social{display:none}}
+
+/* side rail */
+.rail{position:fixed;left:max(14px,env(safe-area-inset-left,0px));top:50%;transform:translateY(-50%);z-index:5;display:flex;flex-direction:column;gap:6px;padding:8px;background:var(--bg3);border-radius:999px;border:1px solid var(--line)}
+.rail a{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:var(--soft)}
+.rail a:hover{background:var(--teal);color:var(--bg3)}
+@media(max-width:1340px){.rail{display:none}}
 
 /* hero */
-.hero{background:radial-gradient(1200px 600px at 85% 10%,var(--sea2),transparent 60%),var(--sea);color:var(--white);position:relative;overflow:hidden}
-.hero::after{content:"";position:absolute;inset:auto 0 0 0;height:1px;background:linear-gradient(90deg,transparent,rgb(143 211 255/.4),transparent)}
-.top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-block:20px}
-.mono{display:inline-flex;align-items:center;gap:10px;font-weight:600;text-decoration:none}
-.mono span{display:grid;place-items:center;width:38px;height:38px;border-radius:10px;background:var(--sky);color:var(--sea);font-weight:700;font-size:15px}
-.top nav{display:flex;gap:4px;flex-wrap:wrap}
-.top nav a{text-decoration:none;font-size:15px;padding:10px 12px;border-radius:8px;color:rgb(255 255 255/.75)}
-.top nav a:hover{color:#fff;background:rgb(255 255 255/.08)}
-.hgrid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(28px,4vw,64px);align-items:center;padding-block:clamp(28px,5vw,72px) clamp(40px,6vw,88px)}
-.avail{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500;padding:7px 12px;border-radius:999px;background:rgb(255 255 255/.08);border:1px solid rgb(255 255 255/.14)}
-.avail::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--pink);box-shadow:0 0 0 4px rgb(255 92 138/.25)}
-.hero h1{font-size:clamp(48px,6.6vw,92px);font-weight:300;letter-spacing:-.04em;margin:20px 0 14px}
-.hero h1 b{font-weight:600;display:block}
-.hero .role{font-size:clamp(17px,1.7vw,20px);color:var(--sky);font-weight:500}
-.hero .lede{color:rgb(255 255 255/.78);margin-top:16px;max-width:52ch}
-.cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
-.btn{display:inline-flex;align-items:center;min-height:48px;padding:0 22px;border-radius:999px;font-weight:600;font-size:16px;text-decoration:none;border:1.5px solid rgb(255 255 255/.4);color:#fff}
-.btn.solid{background:var(--sky);border-color:var(--sky);color:var(--sea)}
-.btn:hover{transform:translateY(-1px)}
-.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:34px;padding-top:20px;border-top:1px solid rgb(255 255 255/.16)}
-.facts b{display:block;font-size:clamp(28px,3vw,38px);font-weight:300;line-height:1;font-variant-numeric:tabular-nums}
-.facts span{font-size:14px;color:rgb(255 255 255/.7);display:block;margin-top:6px;line-height:1.35}
+.hero{padding-block:clamp(28px,5vw,64px) clamp(48px,6vw,88px)}
+.big{text-align:center;font-size:clamp(48px,8vw,104px);font-weight:500;color:var(--teal);letter-spacing:-.02em;margin-bottom:clamp(28px,4vw,52px)}
+.hgrid{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr) minmax(0,236px);gap:clamp(24px,4vw,56px);align-items:center}
+.pcard{position:relative;background:var(--bg2);border:2px solid var(--teal);border-radius:80px 14px 80px 14px;padding:34px 26px 28px;text-align:center}
+.pcard::before{content:"";position:absolute;inset:-9px 9px 9px -9px;border:1.5px solid var(--tealDim);border-radius:84px 16px 84px 16px;z-index:-1}
+.avatar{width:104px;height:104px;margin:0 auto 14px;border-radius:50%;border:3px solid var(--teal);display:grid;place-items:center;background:radial-gradient(circle at 30% 30%,#3d4a57,#232830);font:700 30px var(--font);color:var(--teal);overflow:hidden}
+.avatar img{width:100%;height:100%;object-fit:cover}
+.pcard h3{font-size:24px;font-weight:500}
+.pcard .sub{font:15px var(--mono);color:var(--soft);margin-top:2px}
+.info{list-style:none;margin:20px 0 16px;padding:0;text-align:left;display:flex;flex-direction:column;gap:9px;font-size:14.5px}
+.info li{display:flex;align-items:center;gap:10px;color:var(--soft);overflow-wrap:anywhere}
+.info svg{color:var(--teal)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.chips span{font:700 13px/1 var(--mono);padding:6px 9px;border-radius:6px;background:var(--teal);color:var(--bg3)}
+.dl{display:inline-flex;align-items:center;gap:8px;margin-top:20px;min-height:46px;padding:0 22px;border-radius:999px;background:#fff;color:#1b1f24;font-weight:500;text-decoration:none}
+.dl:hover{background:var(--mint)}
+.greet h1{font-size:clamp(34px,3.8vw,52px);font-weight:400;line-height:1.15}
+.greet p{color:var(--soft);margin-top:20px;max-width:52ch;padding-left:16px;border-left:2px solid var(--line)}
+.talk{display:inline-flex;align-items:center;gap:10px;margin-top:26px;font:700 22px var(--mono);color:var(--teal);text-decoration:none}
+.talk span{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--card)}
+.talk:hover span{background:var(--teal);color:var(--bg3)}
+.stats{background:var(--bg3);border-radius:48px;padding:32px 30px;display:flex;flex-direction:column;gap:26px;box-shadow:0 20px 50px rgb(0 0 0/.3)}
+.stat{display:flex;flex-direction:column;gap:6px}
+.stat b{font-size:clamp(30px,2.8vw,38px);font-weight:500;color:var(--teal);line-height:1;font-variant-numeric:tabular-nums;white-space:nowrap}
+.stat span{font-size:14px;line-height:1.3;color:var(--soft)}
+@media(max-width:1020px){.hgrid{grid-template-columns:minmax(0,1fr) minmax(0,320px)}.greet{grid-column:1/-1;order:-1}.stats{border-radius:28px}}
+@media(max-width:640px){.hgrid{grid-template-columns:1fr}.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding:22px 18px}.stat{flex-direction:column;align-items:flex-start;gap:6px}.stat b{font-size:clamp(24px,7vw,30px)}}
 
-/* roadmap (gantt) */
-.road{background:rgb(255 255 255/.05);border:1px solid rgb(255 255 255/.12);border-radius:20px;padding:22px 22px 16px;backdrop-filter:blur(6px);box-shadow:0 30px 80px rgb(0 0 0/.35)}
-.road-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:12px}
-.road-h b{font-weight:600}
-.legend{display:flex;gap:14px;font-size:13px;color:rgb(255 255 255/.7);flex-wrap:wrap}
-.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
-.rows{position:relative}
-.r{display:grid;grid-template-columns:150px minmax(0,1fr);align-items:center;min-height:52px;border-top:1px solid rgb(255 255 255/.08)}
-.r:first-child{border-top:0}
-.r .lab{font-size:14px;font-weight:600;line-height:1.25;padding-right:12px}
-.r .lab small{display:block;font-weight:400;font-size:12.5px;color:rgb(255 255 255/.6)}
-.track{position:relative;height:52px;background-image:linear-gradient(to right,rgb(255 255 255/.07) 1px,transparent 1px);background-size:calc(100%/14) 100%}
-.bar{position:absolute;top:15px;height:22px;border-radius:6px;left:calc(var(--l)/14*100%);width:calc(var(--w)/14*100%);background:linear-gradient(90deg,#5fb8f0,var(--sky));box-shadow:0 0 18px rgb(143 211 255/.35);animation:grow .9s cubic-bezier(.2,.7,.2,1) both;transform-origin:left}
-.bar.now{background:linear-gradient(90deg,#ff7aa0,var(--pink));box-shadow:0 0 22px rgb(255 92 138/.55)}
-.bar small{position:absolute;left:9px;top:0;font-size:12px;line-height:22px;font-weight:600;color:var(--sea);white-space:nowrap}
-.deg{position:absolute;top:19px;width:14px;height:14px;left:calc(var(--l)/14*100%);transform:translateX(-50%) rotate(45deg);background:#fff;border-radius:3px;box-shadow:0 0 12px rgb(255 255 255/.5)}
-.today{position:absolute;top:0;bottom:0;left:calc(13.9/14*100%);border-left:1.5px dashed var(--pink)}
-.axis{display:grid;grid-template-columns:150px minmax(0,1fr);margin-top:8px}
-.yrs{display:grid;grid-template-columns:repeat(14,1fr);font-size:12px;color:rgb(255 255 255/.55);font-variant-numeric:tabular-nums}
-@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-@media(max-width:980px){.hgrid{grid-template-columns:1fr}}
-@media(max-width:560px){.r,.axis{grid-template-columns:96px minmax(0,1fr)}.r .lab small{display:none}.yrs span:nth-child(even){visibility:hidden}.bar small{display:none}.road{padding:16px 14px 12px}}
+/* section scaffolding */
+.band{padding-block:clamp(48px,6vw,88px);position:relative;overflow:hidden}
+.topo{background-color:var(--bg2);background-image:repeating-radial-gradient(ellipse at 18% 28%,transparent 0 26px,rgb(46 242 208/.07) 27px 28px),repeating-radial-gradient(ellipse at 88% 80%,transparent 0 30px,rgb(46 242 208/.05) 31px 32px)}
+.dark{background:var(--bg3)}
+.cue{display:flex;flex-direction:column;align-items:center;gap:6px;margin-bottom:28px;color:var(--teal)}
+.cue svg{width:22px;height:32px}
+.cue i{display:block;width:0;height:52px;border-left:2px dotted var(--soft)}
+.cue b{width:6px;height:6px;border-radius:50%;background:var(--ink)}
+.stitle{text-align:center;margin-bottom:clamp(32px,4vw,52px)}
+.stitle h2{font-size:clamp(34px,4vw,48px);font-weight:400;color:var(--teal)}
+.rule{display:block;width:120px;height:2px;margin:12px auto 14px;background:var(--teal);position:relative}
+.rule::before,.rule::after{content:"";position:absolute;top:-3px;width:8px;height:8px;border-radius:50%;background:var(--teal)}
+.rule::before{left:-4px}.rule::after{right:-4px}
+.stitle p{font:16px var(--mono);color:var(--soft)}
+.words{position:absolute;inset:0;font:15px/2 var(--mono);color:rgb(255 255 255/.045);overflow:hidden;pointer-events:none;padding:20px;word-spacing:14px;user-select:none}
 
-/* bands */
-.band{padding-block:clamp(48px,6vw,96px)}
-.band.tint{background:var(--tint)}
-.head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:32px}
-.head p{color:var(--soft);max-width:54ch}
-
-/* process */
-.steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;position:relative}
-.steps::before{content:"";position:absolute;left:28px;right:28px;top:27px;height:2px;background:linear-gradient(90deg,var(--sky),var(--pink))}
-.step{position:relative}
-.dot{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:var(--card);border:2px solid var(--sky);color:var(--skyInk);position:relative;z-index:1}
-.step:last-child .dot{border-color:var(--pink);color:var(--pink)}
-.dot svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.step h3{margin:16px 0 6px;font-size:18px}
-.step p{color:var(--soft);font-size:15px;line-height:1.5}
-@media(max-width:900px){.steps{grid-template-columns:1fr;gap:22px}.steps::before{left:27px;right:auto;top:28px;bottom:28px;width:2px;height:auto;background:linear-gradient(180deg,var(--sky),var(--pink))}.step{display:grid;grid-template-columns:56px minmax(0,1fr);gap:0 18px}.step h3{margin:6px 0 4px}.step>div:last-child{grid-column:2}}
-
-/* board */
-.arrows{display:none;gap:8px}
-.arrows button{width:46px;height:46px;border-radius:50%;border:1.5px solid var(--line);background:var(--card);color:var(--ink);font:600 18px var(--font);cursor:pointer}
-.board{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;align-items:start}
-.col{background:var(--tint);border:1px solid var(--line);border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:10px}
-.band.tint .col{background:var(--bg)}
-.col.now{background:var(--sea);border-color:var(--sea);color:#fff}
-.ch{display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding:4px 4px 0}
-.ch b{font-size:17px;font-weight:600;line-height:1.2}
-.ch span{font-size:13px;white-space:nowrap;color:var(--soft)}
-.col.now .ch span{color:var(--pink);font-weight:600}
-.cr{font-size:13.5px;padding:0 4px 6px;color:var(--soft)}
-.col.now .cr{color:rgb(255 255 255/.7)}
-.card{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:13px 14px;display:flex;flex-direction:column;gap:9px;transition:transform .2s,box-shadow .2s}
-.card:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgb(10 37 64/.12)}
-.col.now .card{background:var(--sea2);border-color:rgb(255 255 255/.12);color:#fff}
-.card p{font-size:15px;line-height:1.4;font-weight:500}
-.tags{display:flex;flex-wrap:wrap;gap:5px}
-.tags i{font-style:normal;font-size:12px;line-height:1;padding:5px 8px;border-radius:999px;background:var(--skyTint);color:var(--skyInk);font-weight:500}
-.col.now .tags i{background:rgb(143 211 255/.16);color:var(--sky)}
-.tags i.ai{background:var(--pink);color:#fff}
-@media(max-width:1020px){.arrows{display:flex}.board{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px}.col{flex:0 0 min(310px,84vw);scroll-snap-align:start}}
-
-/* expertise */
-.xgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
-.x{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px}
-.x .ic{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;background:var(--skyTint);color:var(--skyInk);margin-bottom:18px}
-.x .ic svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.x p{color:var(--soft);font-size:15.5px;margin-top:8px;line-height:1.55}
-@media(max-width:1020px){.xgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:600px){.xgrid{grid-template-columns:1fr}}
-
-/* experience */
-.jobs{position:relative;padding-left:28px}
-.jobs::before{content:"";position:absolute;left:6px;top:8px;bottom:8px;width:2px;background:var(--line)}
-.job{position:relative;padding-bottom:34px}
-.job:last-child{padding-bottom:0}
-.job::before{content:"";position:absolute;left:-28px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:3px solid var(--sky)}
-.job.cur::before{border-color:var(--pink);background:var(--pink)}
-.jh{display:flex;justify-content:space-between;gap:6px 20px;flex-wrap:wrap;align-items:baseline}
-.when{font-size:15px;font-weight:600;color:var(--skyInk);font-variant-numeric:tabular-nums;white-space:nowrap}
-.job.cur .when{color:var(--pink)}
-.org{color:var(--soft);font-size:16px;margin-top:2px}
-.job ul{margin:12px 0 0;padding-left:18px;color:var(--soft);max-width:78ch}
-.job li{margin-bottom:5px}
+/* about */
+.agrid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(28px,4vw,56px);align-items:center}
+@media(max-width:900px){.agrid{grid-template-columns:1fr}}
+.boxtitle{display:inline-block;font-size:clamp(30px,3.4vw,40px);font-weight:400;padding:8px 22px;border:2px solid var(--teal);border-radius:0 16px 0 16px;margin-bottom:22px;background:var(--bg2)}
+.hello{background:var(--card);border-radius:22px;padding:26px 28px;box-shadow:0 20px 50px rgb(0 0 0/.25)}
+.hello h3{font-size:26px;font-weight:500;color:var(--teal);margin-bottom:12px}
+.hello p{color:var(--soft);margin-bottom:12px}
+.hello p:last-child{margin-bottom:0}
+.hello em{font-style:normal;color:var(--teal)}
+.road{background:var(--bg3);border-radius:22px;border:1px solid var(--line);padding:22px;box-shadow:0 20px 50px rgb(0 0 0/.3)}
+.road h3{font-size:18px;font-weight:500;margin-bottom:4px}
+.road .note{font:14px var(--mono);color:var(--soft);margin-bottom:14px}
+.r{display:grid;grid-template-columns:118px minmax(0,1fr);align-items:center;min-height:46px;border-top:1px solid var(--line)}
+.r:first-of-type{border-top:0}
+.r .lab{font-size:13.5px;line-height:1.25;padding-right:10px}
+.r .lab small{display:block;color:var(--soft);font-size:12px}
+.track{position:relative;height:46px;background-image:linear-gradient(to right,rgb(255 255 255/.06) 1px,transparent 1px);background-size:calc(100%/14) 100%}
+.bar{position:absolute;top:15px;height:16px;border-radius:5px;left:calc(var(--l)/14*100%);width:calc(var(--w)/14*100%);background:var(--tealDim)}
+.bar.now{background:var(--teal);box-shadow:0 0 16px rgb(46 242 208/.5)}
+.deg{position:absolute;top:16px;width:13px;height:13px;left:calc(var(--l)/14*100%);transform:translateX(-50%) rotate(45deg);background:var(--mint);border-radius:2px}
+.axis{display:grid;grid-template-columns:118px minmax(0,1fr);margin-top:6px}
+.yrs{display:grid;grid-template-columns:repeat(14,1fr);font:12px var(--mono);color:var(--soft)}
+@media(max-width:480px){.yrs span:nth-child(even){visibility:hidden}.r,.axis{grid-template-columns:92px minmax(0,1fr)}}
 
 /* skills */
-.sgrid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(32px,5vw,72px)}
-@media(max-width:900px){.sgrid{grid-template-columns:1fr}}
-.group{margin-bottom:24px}
-.group h3{font-size:16px;margin-bottom:10px;color:var(--soft);font-weight:600}
-.pills{display:flex;flex-wrap:wrap;gap:8px}
-.pills span{font-size:15px;padding:8px 13px;border-radius:999px;background:var(--card);border:1px solid var(--line)}
-.edu{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px}
-.edu+.edu{margin-top:16px}
-.dg{padding-block:12px;border-top:1px solid var(--line)}
-.dg:first-of-type{border-top:0;padding-top:4px}
-.dg b{display:block;font-size:18px;font-weight:600;line-height:1.3}
-.dg span{color:var(--soft);font-size:15px}
-.acc{margin:6px 0 0;padding-left:18px;color:var(--soft)}
-.acc li{margin-bottom:6px}
-.acc li::marker{color:var(--pink)}
+.glyph{position:absolute;right:max(5vw,16px);top:70px;width:120px;height:120px;color:var(--teal);opacity:.9}
+@media(max-width:900px){.glyph{display:none}}
+.tiles{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-bottom:40px;position:relative}
+.tile{background:var(--mint);color:#13171b;border-radius:10px;padding:14px 26px;text-align:center;box-shadow:-6px 6px 0 #1a7f70;min-width:240px}
+.tile svg{width:22px;height:22px;margin-bottom:4px}
+.tile b{display:block;font:700 18px var(--mono)}
+.tile span{font:14px var(--mono)}
+.circles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;position:relative;max-width:900px;margin:0 auto 40px}
+.circ{text-align:center}
+.circ .dot{width:clamp(84px,9vw,112px);height:clamp(84px,9vw,112px);border-radius:50%;margin:0 auto 12px;display:grid;place-items:center;color:#fff;box-shadow:0 14px 30px rgb(0 0 0/.35)}
+.circ .dot svg{width:44%;height:44%;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.circ b{display:block;font:700 18px/1.25 var(--mono)}
+.c1 .dot{background:#e4572e}.c1 b{color:#ff7b52}
+.c2 .dot{background:#1f6fc5}.c2 b{color:#5aa8ff}
+.c3 .dot{background:#e0a21b}.c3 b{color:#f2bf45}
+.c4 .dot{background:#1aa3c9}.c4 b{color:#4cc9ec}
+@media(max-width:700px){.circles{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:28px}}
+.pillset{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;position:relative}
+@media(max-width:900px){.pillset{grid-template-columns:1fr}}
+.pg{background:var(--card);border-radius:16px;padding:20px}
+.pg h3{font:700 15px var(--mono);color:var(--teal);margin-bottom:12px}
+.pills{display:flex;flex-wrap:wrap;gap:7px}
+.pills span{font-size:14px;padding:6px 11px;border-radius:999px;border:1px solid var(--line);color:var(--ink)}
+
+/* experience */
+.xp{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+@media(max-width:860px){.xp{grid-template-columns:1fr}}
+.job{background:var(--card);border-radius:18px;padding:24px;border:1px solid var(--line)}
+.job.cur{border-color:var(--teal)}
+.jh{display:flex;justify-content:space-between;gap:6px 14px;flex-wrap:wrap;align-items:baseline}
+.job h3{font-size:21px;font-weight:500}
+.when{font:700 15px var(--mono);color:var(--teal);white-space:nowrap}
+.org{color:var(--soft);margin-top:4px;font-size:15.5px}
+.job ul{margin:12px 0 0;padding-left:18px;color:var(--soft);font-size:15.5px}
+.job li{margin-bottom:4px}
+.job li::marker{color:var(--teal)}
+.edu{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:20px}
+@media(max-width:860px){.edu{grid-template-columns:1fr}}
+.edu div{border:1px dashed var(--line);border-radius:18px;padding:20px 24px}
+.edu b{display:block;font-size:18px;font-weight:500}
+.edu span{color:var(--soft);font:15px var(--mono)}
+
+/* projects carousel */
+.car{position:relative}
+.track2{display:flex;gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:6px 2px 18px}
+.track2::-webkit-scrollbar{display:none}
+.slide{flex:0 0 min(560px,86%);scroll-snap-align:center;display:flex;flex-direction:column;align-items:center}
+.screen{width:100%;background:#0f1216;border:12px solid #d9dde2;border-bottom-width:34px;border-radius:14px;padding:22px 24px;min-height:248px;display:flex;flex-direction:column;gap:12px;position:relative}
+.screen::after{content:"";position:absolute;left:50%;bottom:-24px;width:12px;height:12px;border-radius:50%;background:#2a2f37;transform:translateX(-50%)}
+.stand{width:120px;height:44px;background:linear-gradient(#cfd4da,#b9c0c7);clip-path:polygon(28% 0,72% 0,86% 100%,14% 100%)}
+.base{width:200px;height:8px;border-radius:4px;background:#cfd4da}
+.screen .org2{font:700 14px var(--mono);color:var(--teal)}
+.screen h3{font-size:clamp(21px,2.4vw,26px);font-weight:500;color:#fff}
+.screen p{color:var(--soft);font-size:15.5px}
+.screen .tg{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+.screen .tg span{font:700 12.5px/1 var(--mono);padding:5px 8px;border-radius:5px;border:1px solid var(--tealDim);color:var(--mint)}
+.nav2{position:absolute;top:120px;width:48px;height:48px;border-radius:50%;border:0;background:var(--card);color:var(--ink);cursor:pointer;display:grid;place-items:center;box-shadow:0 8px 20px rgb(0 0 0/.35);z-index:2}
+.nav2:hover{background:var(--teal);color:var(--bg3)}
+.nav2.prev{left:-8px}.nav2.next{right:-8px}
+@media(max-width:600px){.nav2{top:auto;bottom:-40px}.nav2.prev{left:calc(50% - 56px)}.nav2.next{right:calc(50% - 56px)}.car{padding-bottom:48px}}
+.counter{text-align:center;font:15px var(--mono);color:var(--soft);margin-top:6px}
 
 /* contact */
-.contact{background:radial-gradient(900px 500px at 10% 0%,var(--sea2),transparent 60%),var(--sea);color:#fff;padding-block:clamp(56px,7vw,104px)}
-.contact h2{font-size:clamp(36px,5vw,60px);max-width:16ch}
-.contact .lede{margin-top:14px;max-width:56ch;color:rgb(255 255 255/.78)}
-.ways{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:36px}
+.boxcta{display:block;width:fit-content;margin:0 auto 34px;font:700 clamp(20px,2.4vw,26px) var(--mono);color:var(--teal);padding:10px 26px;border:2px solid var(--teal);border-radius:0 16px 0 16px}
+.ways{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;max-width:980px;margin:0 auto}
 @media(max-width:800px){.ways{grid-template-columns:1fr}}
-.way{background:rgb(255 255 255/.05);border:1px solid rgb(255 255 255/.14);border-radius:16px;padding:20px 22px}
-.way small{display:block;font-size:14px;color:var(--sky);margin-bottom:6px;font-weight:500}
-.way .v{font-size:18px;font-weight:600;overflow-wrap:anywhere;user-select:all}
-.way a{text-decoration-color:rgb(143 211 255/.6);text-underline-offset:4px}
-.copy{margin-top:14px;min-height:42px;padding:0 16px;border-radius:999px;border:1.5px solid var(--sky);background:transparent;color:var(--sky);font:600 14px var(--font);cursor:pointer}
-footer{background:var(--sea);color:rgb(255 255 255/.55);font-size:14px;border-top:1px solid rgb(255 255 255/.08)}
-footer .in{padding-block:22px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.way{background:var(--card);border-radius:18px;padding:22px 24px;border-bottom:2px solid var(--teal);display:flex;flex-direction:column;gap:6px}
+.way small{display:flex;align-items:center;gap:8px;font:14px var(--mono);color:var(--teal)}
+.way .v{font-size:18px;font-weight:500;overflow-wrap:anywhere;user-select:all}
+.way a{text-decoration-color:var(--tealDim);text-underline-offset:4px}
+.copy{align-self:flex-start;margin-top:8px;min-height:42px;padding:0 18px;border-radius:999px;border:0;background:var(--teal);color:var(--bg3);font:500 15px var(--font);cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.copy:hover{background:var(--mint)}
+
+footer{background:var(--bg3);border-top:1px solid var(--line);font-size:14px;color:var(--soft)}
+footer .in{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-block:22px}
+footer .fs{display:flex;gap:10px}
+footer .fs a{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--teal);color:var(--bg3)}
 </style>
 </head>
 <body>
 
-<header class="hero" id="top">
-  <div class="in top">
-    <a class="mono" href="#top"><span>SFA</span>Syed Faizan Ali</a>
-    <nav aria-label="Sections"><a href="#method">Method</a><a href="#board">Projects</a><a href="#experience">Experience</a><a href="#skills">Skills</a><a href="#contact">Contact</a></nav>
-  </div>
-  <div class="in hgrid">
-    <div>
-      <span class="avail">Open to senior PM roles &amp; consulting</span>
-      <h1>Syed <b>Faizan Ali</b></h1>
-      <p class="role">Senior IT Project Manager · Digital Transformation · PMO · Agile Delivery</p>
-      <p class="lede">12+ years delivering digital transformation, AI-enabled, enterprise, web and mobile projects across insurance, IT services and manufacturing, within scope, schedule and budget.</p>
-      <div class="cta"><a class="btn solid" href="#contact">Get in touch</a><a class="btn" href="#board">View projects</a></div>
-      <div class="facts">
-        <div><b>12+</b><span>years in IT delivery</span></div>
-        <div><b>12–20</b><span>team members led</span></div>
-        <div><b>28</b><span>key projects across 4 organisations</span></div>
-      </div>
-    </div>
+<nav class="rail" aria-label="Quick links">
+  <a href="#top" title="Home"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></a>
+  <a href="#about" title="About"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg></a>
+  <a href="#skills" title="Skills"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="4" width="5" height="16" rx="1.5"/><rect x="10" y="4" width="5" height="10" rx="1.5"/><rect x="17" y="4" width="4" height="6" rx="1.5"/></svg></a>
+  <a href="#experience" title="Experience"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/></svg></a>
+  <a href="#projects" title="Projects"><svg class="i" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></a>
+  <a href="#contact" title="Contact"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></a>
+</nav>
 
-    <div class="road" aria-label="Career roadmap from 2013 to today">
-      <div class="road-h"><b>Career roadmap</b>
-        <div class="legend"><span><i style="background:var(--sky)"></i>Delivered</span><span><i style="background:var(--pink)"></i>Current</span><span><i style="background:#fff;transform:rotate(45deg)"></i>Degree</span></div>
-      </div>
-      <div class="rows">
-        <div class="r"><div class="lab">EFU Life Assurance<small>Project Manager</small></div><div class="track"><div class="bar now" style="--l:10.92;--w:2.98"></div><div class="today"></div></div></div>
-        <div class="r"><div class="lab">Galaxy Sci. &amp; Tech<small>Project Coordinator</small></div><div class="track"><div class="bar" style="--l:10.42;--w:.5"></div></div></div>
-        <div class="r"><div class="lab">Merchant Holdings<small>Project Manager</small></div><div class="track"><div class="bar" style="--l:9;--w:1.42"></div></div></div>
-        <div class="r"><div class="lab">Lucky Cement<small>Sr. Asst. Manager IT</small></div><div class="track"><div class="bar" style="--l:.42;--w:8.58"><small>Jun 2013 – Jan 2022</small></div></div></div>
-        <div class="r"><div class="lab">Education<small>BS CS · MPM</small></div><div class="track"><div class="deg" style="--l:.35" title="BS Computer Science, UIT, 2013"></div><div class="deg" style="--l:9.5" title="Master of Project Management, SZABIST, 2022"></div></div></div>
-      </div>
-      <div class="axis"><div></div><div class="yrs"><span>’13</span><span>’14</span><span>’15</span><span>’16</span><span>’17</span><span>’18</span><span>’19</span><span>’20</span><span>’21</span><span>’22</span><span>’23</span><span>’24</span><span>’25</span><span>’26</span></div></div>
-    </div>
+<header class="in top" id="top">
+  <a class="logo" href="#top"><span>&lt;SFA/&gt;</span>Syed Faizan Ali</a>
+  <nav class="menu" aria-label="Sections"><a class="on" href="#top">Home</a><a href="#about">About</a><a href="#skills">Skills</a><a href="#experience">Experience</a><a href="#projects">Projects</a><a href="#contact">Contact</a></nav>
+  <div class="social">
+    <a href="https://www.linkedin.com/in/syedfaizanali1987/" target="_blank" rel="noopener"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/></svg>LinkedIn</a>
+    <a href="https://www.fiverr.com/sfali1987" target="_blank" rel="noopener"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M10 17v-6h4M10 11V9a2 2 0 0 1 2-2h1M14 11v6"/></svg>Fiverr</a>
+    <a href="https://www.youtube.com/@sfaliteachings" target="_blank" rel="noopener"><svg class="i" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z"/></svg>YouTube</a>
   </div>
 </header>
 
-<section class="band" id="method">
-  <div class="in">
-    <div class="head"><div><div class="kicker">How I deliver</div><h2>From requirement <b>to go-live</b></h2></div><p>The same disciplined path on every project, whether it is a mobile app, a claims workflow or a data center move.</p></div>
-    <div class="steps">
-      <div class="step"><div class="dot"><svg viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></div><div><h3>Initiate</h3><p>Requirement gathering, BRDs and project charters agreed with business owners.</p></div></div>
-      <div class="step"><div class="dot"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4M7 13h5M7 17h9"/></svg></div><div><h3>Plan</h3><p>Scope, timelines, resources, budget and a risk register with mitigation plans.</p></div></div>
-      <div class="step"><div class="dot"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg></div><div><h3>Build in sprints</h3><p>Sprint planning, stand-ups, reviews and retrospectives, tracked in Jira.</p></div></div>
-      <div class="step"><div class="dot"><svg viewBox="0 0 24 24"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg></div><div><h3>Test &amp; UAT</h3><p>QA, API testing, defect tracking and user acceptance with business teams.</p></div></div>
-      <div class="step"><div class="dot"><svg viewBox="0 0 24 24"><path d="M5 15c-1.5 1.3-2 4-2 6 2 0 4.7-.5 6-2"/><path d="M9 15l-3-3c1-4 4-8 12-9-1 8-5 11-9 12z"/><circle cx="15" cy="9" r="1.5"/></svg></div><div><h3>Go-live &amp; support</h3><p>Production deployment, post-release support and status reporting to management.</p></div></div>
+<section class="in hero">
+  <div class="big">Project Manager</div>
+  <div class="hgrid">
+    <div class="pcard">
+      <!-- To add your photo: put photo.jpg next to index.html and replace "SFA" below with <img src="photo.jpg" alt="Syed Faizan Ali"> -->
+      <div class="avatar">SFA</div>
+      <h3>Faizan Ali</h3>
+      <div class="sub">Senior IT Project Manager</div>
+      <ul class="info">
+        <li><svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>sfaali1987@gmail.com</li>
+        <li><svg class="i" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Karachi, Pakistan</li>
+        <li><svg class="i" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/></svg>Full-time / Consulting</li>
+        <li><svg class="i" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>in/syedfaizanali1987</li>
+      </ul>
+      <div class="chips"><span>Agile</span><span>Jira</span><span>PMO</span><span>Scrum</span></div>
+      <a class="dl" href="Syed_Faizan_Ali_Resume.pdf" download>Download CV <svg class="i" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
+    </div>
+
+    <div class="greet">
+      <h1>Hi,<br>I'm <span class="t">Faizan</span>,<br>Senior IT Project Manager</h1>
+      <p>I help organisations deliver digital transformation, AI-enabled, enterprise, web and mobile projects within scope, schedule and budget. If you need someone who gets projects over the line, let's talk.</p>
+      <a class="talk" href="#contact">Let's Talk <span><svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span></a>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><b>12+</b><span>Years of<br>Experience</span></div>
+      <div class="stat"><b>28</b><span>Key Projects<br>Delivered</span></div>
+      <div class="stat"><b>12–20</b><span>Team<br>Members Led</span></div>
     </div>
   </div>
 </section>
 
-<section class="band tint" id="board">
+<section class="band topo" id="about">
   <div class="in">
-    <div class="head"><div><div class="kicker">Key projects</div><h2>Delivery <b>board</b></h2></div>
-      <div class="arrows"><button type="button" id="prev" aria-label="Previous column">←</button><button type="button" id="next" aria-label="Next column">→</button></div></div>
-    <div class="board" id="boardScroll" tabindex="0" aria-label="Projects by organisation">
-      <div class="col">
-        <div class="ch"><b>Lucky Cement</b><span>2013 – 2022</span></div><div class="cr">Sr. Assistant Manager – IT</div>
-        <div class="card"><p>Data center relocation &amp; server deployment</p><div class="tags"><i>Infrastructure</i></div></div>
-        <div class="card"><p>Finance Management System</p><div class="tags"><i>Development</i><i>Finance</i></div></div>
-        <div class="card"><p>IT Support Ticketing System</p><div class="tags"><i>Development</i><i>ITSM</i></div></div>
-        <div class="card"><p>Inventory &amp; Gate Pass Management System</p><div class="tags"><i>Development</i></div></div>
-        <div class="card"><p>Avaya IP phones and EMS deployment</p><div class="tags"><i>Infrastructure</i></div></div>
+    <div class="cue" aria-hidden="true"><svg viewBox="0 0 22 32" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="1" width="20" height="30" rx="10"/><path d="M11 7v6"/></svg><i></i><b></b></div>
+    <div class="agrid">
+      <div>
+        <h2 class="boxtitle">About Me</h2>
+        <div class="hello">
+          <h3>Hello!</h3>
+          <p>My name is Faizan and I am a Senior IT Project Manager with <em>12+ years</em> of experience across <em>insurance</em>, <em>IT services</em> and <em>manufacturing</em>.</p>
+          <p>I lead cross-functional teams and manage stakeholders, vendors, budgets and project governance, delivering projects within scope, schedule and budget.</p>
+          <p>My toolkit covers <em>Agile/Scrum</em>, SDLC, <em>PMO</em>, business analysis, risk management, IT governance and compliance.</p>
+          <p>Today I lead digital transformation at EFU Life Assurance, from mobile apps and customer portals to claims and onboarding digitalization.</p>
+        </div>
       </div>
-      <div class="col">
-        <div class="ch"><b>Merchant Holdings</b><span>2022 – 2023</span></div><div class="cr">Project Manager</div>
-        <div class="card"><p>Lytics: finds relevant content in news and talk shows by keyword extraction</p><div class="tags"><i class="ai">AI</i><i>Mobile</i><i>Web</i></div></div>
-        <div class="card"><p>PTV Flix mobile app</p><div class="tags"><i>Mobile</i><i>Media</i></div></div>
-        <div class="card"><p>E-commerce, corporate websites and microsites</p><div class="tags"><i>Web</i></div></div>
-        <div class="card"><p>SEO, performance and rich media campaigns</p><div class="tags"><i>Web</i><i>Marketing</i></div></div>
-      </div>
-      <div class="col">
-        <div class="ch"><b>Galaxy Science &amp; Tech</b><span>2023</span></div><div class="cr">Project Coordinator</div>
-        <div class="card"><p>Senate Digitization Solution</p><div class="tags"><i>Government</i></div></div>
-        <div class="card"><p>Core Banking Solution</p><div class="tags"><i>Banking</i></div></div>
-        <div class="card"><p>Educational Management Solution</p><div class="tags"><i>Education</i></div></div>
-      </div>
-      <div class="col now">
-        <div class="ch"><b>EFU Life Assurance</b><span>● Now</span></div><div class="cr">Project Manager · since Dec 2023</div>
-        <div class="card"><p>EFU WIN mobile app &amp; dashboard for digital health engagement</p><div class="tags"><i>Mobile</i><i>Health</i></div></div>
-        <div class="card"><p>Digitalization of medical claims</p><div class="tags"><i>Transformation</i><i>Claims</i></div></div>
-        <div class="card"><p>Customer onboarding &amp; verification, document processing, HR hiring</p><div class="tags"><i>Transformation</i></div></div>
-        <div class="card"><p>Corporate website, mobile apps revamp and digital web portal</p><div class="tags"><i>Web</i><i>Mobile</i><i>UI/UX</i></div></div>
-        <div class="card"><p>Conservation Portal for Banca &amp; sales agents</p><div class="tags"><i>Portal</i><i>Sales</i></div></div>
-        <div class="card"><p>Core insurance ERP development &amp; enhancements</p><div class="tags"><i>ERP</i></div></div>
-        <div class="card"><p>Jira Service Management rollout for IT support</p><div class="tags"><i>ITSM</i><i>Tooling</i></div></div>
+      <div class="road" aria-label="Career roadmap, 2013 to today">
+        <h3>Career roadmap</h3>
+        <div class="note">Jun 2013 → today</div>
+        <div class="r"><div class="lab">EFU Life<small>Project Manager</small></div><div class="track"><div class="bar now" style="--l:10.92;--w:2.98"></div></div></div>
+        <div class="r"><div class="lab">Galaxy S&amp;T<small>Coordinator</small></div><div class="track"><div class="bar" style="--l:10.42;--w:.5"></div></div></div>
+        <div class="r"><div class="lab">Merchant<small>Project Manager</small></div><div class="track"><div class="bar" style="--l:9;--w:1.42"></div></div></div>
+        <div class="r"><div class="lab">Lucky Cement<small>Sr. Asst. Mgr IT</small></div><div class="track"><div class="bar" style="--l:.42;--w:8.58"></div></div></div>
+        <div class="r"><div class="lab">Degrees<small>BS CS · MPM</small></div><div class="track"><div class="deg" style="--l:.35" title="BS Computer Science, 2013"></div><div class="deg" style="--l:9.5" title="Master of Project Management, 2022"></div></div></div>
+        <div class="axis"><div></div><div class="yrs"><span>’13</span><span>’14</span><span>’15</span><span>’16</span><span>’17</span><span>’18</span><span>’19</span><span>’20</span><span>’21</span><span>’22</span><span>’23</span><span>’24</span><span>’25</span><span>’26</span></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="band" id="expertise">
+<section class="band" id="skills" style="background:var(--bg2)">
+  <div class="words" aria-hidden="true">sprint planning backlog grooming user stories acceptance criteria UAT sign-off risk register RAID log stakeholder map BRD project charter go-live retrospective burndown velocity change request status report milestone critical path dependency vendor SLA audit closure release plan scope baseline sprint review daily stand-up epic story QA task defect triage deployment hypercare sprint planning backlog grooming user stories acceptance criteria UAT sign-off risk register RAID log stakeholder map BRD project charter go-live retrospective burndown velocity change request status report milestone critical path dependency vendor SLA audit closure release plan scope baseline sprint review daily stand-up epic story QA task defect triage deployment hypercare sprint planning backlog grooming user stories acceptance criteria UAT sign-off risk register RAID log stakeholder map BRD project charter go-live retrospective burndown velocity change request status report milestone critical path dependency vendor SLA audit closure release plan</div>
+  <svg class="glyph" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="14" width="28" height="92" rx="6"/><rect x="46" y="14" width="28" height="60" rx="6"/><rect x="84" y="14" width="28" height="36" rx="6"/></svg>
   <div class="in">
-    <div class="head"><div><div class="kicker">Expertise</div><h2>What I bring <b>to a project</b></h2></div></div>
-    <div class="xgrid">
-      <div class="x"><div class="ic"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="3"/><path d="M10 18h4"/></svg></div><h3>Digital transformation</h3><p>Paper-heavy work moved into digital workflows: claims, onboarding, document processing and hiring, plus the portals and apps around them.</p></div>
-      <div class="x"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg></div><h3>PMO &amp; governance</h3><p>BRDs, charters, risk registers and status reports that give management a clear view, plus internal and external IT audits.</p></div>
-      <div class="x"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="5" height="16" rx="1.5"/><rect x="10" y="4" width="5" height="10" rx="1.5"/><rect x="17" y="4" width="4" height="6" rx="1.5"/></svg></div><h3>Agile &amp; Scrum</h3><p>Sprint cadence, backlog management and Jira administration, with QA, UAT and releases managed end to end.</p></div>
-      <div class="x"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.5 3.4-5.5 6.5-5.5s5.7 2 6.5 5.5"/><circle cx="17.5" cy="9" r="2.5"/><path d="M16 14.6c2.6.2 4.6 2 5.3 5.4"/></svg></div><h3>Stakeholders &amp; vendors</h3><p>Business owners, technical teams and vendors kept aligned, from requirements through contracts and budgets.</p></div>
+    <div class="cue" aria-hidden="true"><svg viewBox="0 0 22 32" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="1" width="20" height="30" rx="10"/><path d="M11 7v6"/></svg><i></i><b></b></div>
+    <div class="stitle"><h2>Skills</h2><span class="rule"></span><p>Delivering projects the disciplined way, every time</p></div>
+    <div class="tiles">
+      <div class="tile"><svg class="i" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg><b>Project Delivery</b><span>Agile · PMO · UAT</span></div>
+      <div class="tile"><svg class="i" viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg><b>Tools</b><span>Jira · Confluence · MS Project</span></div>
+    </div>
+    <div class="circles">
+      <div class="circ c1"><div class="dot"><svg viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M10 18h4"/></svg></div><b>Digital<br>Transformation</b></div>
+      <div class="circ c2"><div class="dot"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg></div><b>PMO &amp;<br>Governance</b></div>
+      <div class="circ c3"><div class="dot"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="5" height="16" rx="1.5"/><rect x="10" y="4" width="5" height="10" rx="1.5"/><rect x="17" y="4" width="4" height="6" rx="1.5"/></svg></div><b>Agile &amp;<br>Scrum</b></div>
+      <div class="circ c4"><div class="dot"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.5 3.4-5.5 6.5-5.5s5.7 2 6.5 5.5"/><circle cx="17.5" cy="9" r="2.5"/><path d="M16 14.6c2.6.2 4.6 2 5.3 5.4"/></svg></div><b>Stakeholder<br>Management</b></div>
+    </div>
+    <div class="pillset">
+      <div class="pg"><h3>Core competencies</h3><div class="pills"><span>Project planning</span><span>AI-enabled delivery</span><span>PMO reporting</span><span>SDLC</span><span>Business requirements</span><span>Risk &amp; issues</span><span>QA &amp; UAT</span><span>IT governance &amp; compliance</span><span>Vendor management</span><span>Team leadership</span></div></div>
+      <div class="pg"><h3>Project tools</h3><div class="pills"><span>Jira</span><span>Jira Service Management</span><span>Confluence</span><span>MS Project</span><span>Primavera P6</span><span>Float</span></div></div>
+      <div class="pg"><h3>Technical &amp; design</h3><div class="pills"><span>Figma</span><span>Postman</span><span>PHP</span><span>MySQL</span><span>WordPress</span><span>Server management</span><span>MS Windows</span><span>MS Office</span><span>Photoshop</span><span>Illustrator</span><span>InPage</span></div></div>
     </div>
   </div>
 </section>
 
-<section class="band tint" id="experience">
+<section class="band topo" id="experience">
   <div class="in">
-    <div class="head"><div><div class="kicker">Experience</div><h2>12+ years, <b>four organisations</b></h2></div></div>
-    <div class="jobs">
+    <div class="cue" aria-hidden="true"><svg viewBox="0 0 22 32" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="1" width="20" height="30" rx="10"/><path d="M11 7v6"/></svg><i></i><b></b></div>
+    <div class="stitle"><h2>Experience</h2><span class="rule"></span><p>12+ years across four organisations</p></div>
+    <div class="xp">
       <div class="job cur"><div class="jh"><h3>Project Manager</h3><span class="when">Dec 2023 – Present</span></div><div class="org">EFU Life Assurance Ltd. · Karachi</div>
-        <ul><li>Lead end-to-end delivery of digital transformation and business application projects aligned with organisational objectives.</li><li>Manage scope, timelines, resources, budgets, risks and deliverables across multiple initiatives.</li><li>Own BRDs, project charters, plans, timelines and status reports.</li><li>Administer Jira and run daily stand-ups, sprint planning, reviews and retrospectives.</li><li>Manage UAT, API testing, defect tracking and issue resolution.</li><li>Support internal and external IT audits through to timely closure of findings.</li></ul></div>
+        <ul><li>Lead end-to-end delivery of digital transformation and business application projects.</li><li>Manage scope, timelines, resources, budgets, risks and deliverables across multiple initiatives.</li><li>Own BRDs, charters, plans and status reports; administer Jira and run Agile ceremonies.</li><li>Manage UAT, API testing and defect tracking; support internal and external IT audits.</li></ul></div>
       <div class="job"><div class="jh"><h3>Project Coordinator</h3><span class="when">Jun 2023 – Dec 2023</span></div><div class="org">Galaxy Science &amp; Technology (Pvt.) Ltd. · Karachi</div>
-        <ul><li>Built project plans and execution strategies with the COO.</li><li>Maintained plans, Gantt charts, status reports and change requests; tracked milestones and deliverables.</li><li>Coordinated communication between business stakeholders and technical teams.</li></ul></div>
+        <ul><li>Built project plans and execution strategies with the COO.</li><li>Maintained plans, Gantt charts, status reports and change requests.</li><li>Tracked milestones and coordinated business and technical teams.</li></ul></div>
       <div class="job"><div class="jh"><h3>Project Manager</h3><span class="when">Jan 2022 – Jun 2023</span></div><div class="org">Merchant Holdings (Pvt.) Ltd. · Karachi</div>
-        <ul><li>Led cross-functional teams delivering web, mobile, digital transformation and AI projects.</li><li>Led delivery of an AI-powered app using keyword extraction on news and talk-show content.</li><li>Ran client engagement, requirement gathering, risk management and Agile ceremonies.</li><li>Oversaw QA, UAT and production deployment; administered Jira, Float and Confluence.</li></ul></div>
+        <ul><li>Led cross-functional teams delivering web, mobile, digital transformation and AI projects.</li><li>Delivered an AI-powered app using keyword extraction on news and talk shows.</li><li>Oversaw QA, UAT and deployment; administered Jira, Float and Confluence.</li></ul></div>
       <div class="job"><div class="jh"><h3>Sr. Assistant Manager – IT</h3><span class="when">Jun 2013 – Jan 2022</span></div><div class="org">Lucky Cement Ltd. · Karachi</div>
-        <ul><li>Led IT support and data center operations, ensuring stability and compliance.</li><li>Managed server administration, backups and infrastructure planning.</li><li>Negotiated vendor contracts and managed IT budgets and procurement.</li><li>Ran IT security awareness training and enforced information security policies.</li></ul></div>
+        <ul><li>Led IT support and data center operations, ensuring stability and compliance.</li><li>Managed servers, backups, IT budgets, procurement and vendor contracts.</li><li>Ran security awareness training and enforced information security policies.</li></ul></div>
+    </div>
+    <div class="edu">
+      <div><b>Master of Project Management</b><span>SZABIST, Karachi · 2021 – 2022</span></div>
+      <div><b>BS Computer Science</b><span>Usman Institute of Technology, Karachi · 2008 – 2013</span></div>
     </div>
   </div>
 </section>
 
-<section class="band" id="skills">
-  <div class="in sgrid">
-    <div>
-      <div class="kicker">Skills</div><h2 style="margin-bottom:28px">Competencies <b>&amp; tools</b></h2>
-      <div class="group"><h3>Core competencies</h3><div class="pills"><span>Project planning &amp; execution</span><span>AI-enabled delivery</span><span>Digital transformation</span><span>PMO governance &amp; reporting</span><span>Agile &amp; Scrum</span><span>SDLC</span><span>Stakeholder &amp; vendor management</span><span>Business requirements analysis</span><span>Risk &amp; issue management</span><span>QA &amp; UAT management</span><span>IT governance &amp; compliance</span><span>Team leadership</span></div></div>
-      <div class="group"><h3>Project tools</h3><div class="pills"><span>Jira</span><span>Jira Service Management</span><span>Confluence</span><span>MS Project</span><span>Primavera P6</span><span>Float</span></div></div>
-      <div class="group"><h3>Design, development &amp; infrastructure</h3><div class="pills"><span>Figma</span><span>Postman</span><span>PHP</span><span>MySQL</span><span>WordPress</span><span>Server management</span><span>MS Windows</span><span>MS Office</span><span>Photoshop</span><span>Illustrator</span><span>InPage</span></div></div>
-    </div>
-    <div>
-      <div class="edu"><h3 style="margin-bottom:8px">Education</h3>
-        <div class="dg"><b>Master of Project Management</b><span>SZABIST, Karachi · 2021 – 2022</span></div>
-        <div class="dg"><b>BS Computer Science</b><span>Usman Institute of Technology, Karachi · 2008 – 2013</span></div></div>
-      <div class="edu"><h3>Accomplishments</h3>
-        <ul class="acc"><li>Led teams of 12–20 members across multiple digital transformation projects.</li><li>Delivered mission-critical applications, portals and automation systems on time and within budget.</li><li>Implemented IT process improvements that raised efficiency and operational reliability.</li><li>Spearheaded security awareness initiatives and infrastructure modernization.</li></ul></div>
-    </div>
-  </div>
-</section>
-
-<section class="contact" id="contact">
+<section class="band dark" id="projects">
   <div class="in">
-    <div class="kicker" style="color:var(--sky)">Contact</div>
-    <h2>Have a project that needs <b>a steady hand?</b></h2>
-    <p class="lede">Open to senior project management and PMO roles, and to consulting on digital transformation and agile delivery. Email is the fastest way to reach me.</p>
+    <div class="cue" aria-hidden="true"><svg viewBox="0 0 22 32" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="1" width="20" height="30" rx="10"/><path d="M11 7v6"/></svg><i></i><b></b></div>
+    <div class="stitle"><h2>Projects</h2><span class="rule"></span><p>I had the pleasure of delivering these projects</p></div>
+    <div class="car">
+      <button class="nav2 prev" type="button" id="prev" aria-label="Previous project"><svg class="i" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>
+      <div class="track2" id="slides" tabindex="0" aria-label="Projects">
+        <div class="slide"><div class="screen"><span class="org2">EFU Life Assurance</span><h3>EFU WIN mobile app &amp; dashboard</h3><p>A mobile app and dashboard for digital health engagement, linking customer wellness to their insurance.</p><div class="tg"><span>Mobile</span><span>Health</span><span>Dashboard</span></div></div><div class="stand"></div><div class="base"></div></div>
+        <div class="slide"><div class="screen"><span class="org2">EFU Life Assurance</span><h3>Digitalization of medical claims</h3><p>Moved medical claims from paper to a digital workflow for faster claim processing.</p><div class="tg"><span>Transformation</span><span>Claims</span></div></div><div class="stand"></div><div class="base"></div></div>
+        <div class="slide"><div class="screen"><span class="org2">EFU Life Assurance</span><h3>Onboarding, documents &amp; HR hiring</h3><p>Digitalized customer onboarding and verification, document processing and the HR hiring process.</p><div class="tg"><span>Transformation</span><span>Workflow</span></div></div><div class="stand"></div><div class="base"></div></div>
+        <div class="slide"><div class="screen"><span class="org2">EFU Life Assurance</span><h3>Website, portals &amp; apps revamp</h3><p>Corporate website revamp, a digital web portal for customers, a mobile apps revamp and a Conservation Portal for Banca and sales agents.</p><div class="tg"><span>Web</span><span>Mobile</span><span>UI/UX</span></div></div><div class="stand"></div><div class="base"></div></div>
+        <div class="slide"><div class="screen"><span class="org2">EFU Life Assurance</span><h3>Core ERP &amp; Jira Service Management</h3><p>Core insurance ERP development and enhancements, and a Jira Service Management rollout for IT support.</p><div class="tg"><span>ERP</span><span>ITSM</span></div></div><div class="stand"></div><div class="base"></div></div>
+        <div class="slide"><div class="screen"><span class="org2">Merchant Holdings</span><h3>Lytics: AI media app</h3><p>A mobile and web app that uses keyword extraction to find relevant content in news broadcasts and talk shows. Also delivered PTV Flix.</p><div class="tg"><span>AI</span><span>Mobile</span><span>Web</span></div></div><div class="stand"></div><div class="base"></div></div>
+        <div class="slide"><div class="screen"><span class="org2">Galaxy Science &amp; Technology</span><h3>Senate, banking &amp; education systems</h3><p>Senate Digitization Solution, Core Banking Solution and Educational Management Solution.</p><div class="tg"><span>Government</span><span>Banking</span><span>Education</span></div></div><div class="stand"></div><div class="base"></div></div>
+        <div class="slide"><div class="screen"><span class="org2">Lucky Cement</span><h3>Data center relocation &amp; in-house systems</h3><p>Data center relocation and server deployment, plus Finance, IT ticketing and Inventory &amp; Gate Pass systems.</p><div class="tg"><span>Infrastructure</span><span>Development</span></div></div><div class="stand"></div><div class="base"></div></div>
+      </div>
+      <button class="nav2 next" type="button" id="next" aria-label="Next project"><svg class="i" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
+    </div>
+    <div class="counter" id="counter" aria-live="polite">1 / 8</div>
+  </div>
+</section>
+
+<!-- BLOG SECTION: hidden for now. To show it, delete the word "hidden" in the line below and add <a href="#blog">Blog</a> to the menu. -->
+<section class="band" id="blog" hidden>
+  <div class="in">
+    <div class="stitle"><h2>Blog</h2><span class="rule"></span><p>My thoughts on project management and technology</p></div>
+  </div>
+</section>
+
+<section class="band topo" id="contact">
+  <div class="in">
+    <div class="cue" aria-hidden="true"><svg viewBox="0 0 22 32" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="1" width="20" height="30" rx="10"/><path d="M11 7v6"/></svg><i></i><b></b></div>
+    <div class="stitle"><h2>Contact</h2><span class="rule"></span><p>I'm currently available for senior PM roles and consulting</p></div>
+    <span class="boxcta">Get In Touch</span>
     <div class="ways">
-      <div class="way"><small>Email</small><div class="v" id="email">sfaali1987@gmail.com</div><button class="copy" type="button" id="copyEmail">Copy email</button></div>
-      <div class="way"><small>LinkedIn</small><div class="v"><a href="https://www.linkedin.com/in/syedfaizanali1987/" target="_blank" rel="noopener">in/syedfaizanali1987</a></div></div>
-      <div class="way"><small>Fiverr</small><div class="v"><a href="https://www.fiverr.com/sfali1987" target="_blank" rel="noopener">fiverr.com/sfali1987</a></div></div>
+      <div class="way"><small><svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>Email</small><div class="v" id="email">sfaali1987@gmail.com</div><button class="copy" type="button" id="copyEmail">Copy email</button></div>
+      <div class="way"><small><svg class="i" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/></svg>LinkedIn</small><div class="v"><a href="https://www.linkedin.com/in/syedfaizanali1987/" target="_blank" rel="noopener">in/syedfaizanali1987</a></div></div>
+      <div class="way"><small><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M10 17v-6h4M10 11V9a2 2 0 0 1 2-2h1M14 11v6"/></svg>Fiverr</small><div class="v"><a href="https://www.fiverr.com/sfali1987" target="_blank" rel="noopener">fiverr.com/sfali1987</a></div></div>
     </div>
   </div>
 </section>
-<footer><div class="in"><span>© 2026 Syed Faizan Ali</span><span>DHA, Karachi, Pakistan</span></div></footer>
+
+<footer>
+  <div class="in">
+    <span>© 2026 Syed Faizan Ali. All rights reserved.</span>
+    <div class="fs">
+      <a href="https://www.linkedin.com/in/syedfaizanali1987/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg class="i" viewBox="0 0 24 24"><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/></svg></a>
+      <a href="https://www.fiverr.com/sfali1987" target="_blank" rel="noopener" aria-label="Fiverr"><svg class="i" viewBox="0 0 24 24"><path d="M10 17v-6h4M10 11V9a2 2 0 0 1 2-2h1M14 11v6"/></svg></a>
+      <a href="https://www.youtube.com/@sfaliteachings" target="_blank" rel="noopener" aria-label="YouTube"><svg class="i" viewBox="0 0 24 24"><path d="M10 9l5 3-5 3z"/></svg></a>
+    </div>
+    <span>Design based on a template by JohannLeon (Figma Community)</span>
+  </div>
+</footer>
 
 <script>
 {
@@ -335,11 +385,16 @@ footer .in{padding-block:22px;display:flex;justify-content:space-between;gap:10p
     const sel = () => { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = 'Selected, press Ctrl+C'; };
     try { navigator.clipboard.writeText(el.textContent.trim()).then(done, sel); } catch (e) { sel(); }
   });
-  const board = document.getElementById('boardScroll');
-  const step = (d) => { const c = board.querySelector('.col'); board.scrollBy({ left: d * (c.offsetWidth + 16), behavior: 'smooth' }); };
-  document.getElementById('prev').addEventListener('click', () => step(-1));
-  document.getElementById('next').addEventListener('click', () => step(1));
-  board.addEventListener('keydown', (e) => { if (e.key === 'ArrowRight') { step(1); e.preventDefault(); } if (e.key === 'ArrowLeft') { step(-1); e.preventDefault(); } });
+  const track = document.getElementById('slides'), slides = [...track.children], counter = document.getElementById('counter');
+  const current = () => { const mid = track.scrollLeft + track.clientWidth / 2; let best = 0, d = 1e9; slides.forEach((s, i) => { const c = s.offsetLeft + s.offsetWidth / 2, dd = Math.abs(c - mid); if (dd < d) { d = dd; best = i; } }); return best; };
+  const go = (i) => { const n = (i + slides.length) % slides.length, s = slides[n]; track.scrollTo({ left: s.offsetLeft - (track.clientWidth - s.offsetWidth) / 2, behavior: 'smooth' }); };
+  document.getElementById('prev').addEventListener('click', () => go(current() - 1));
+  document.getElementById('next').addEventListener('click', () => go(current() + 1));
+  track.addEventListener('keydown', (e) => { if (e.key === 'ArrowRight') { go(current() + 1); e.preventDefault(); } if (e.key === 'ArrowLeft') { go(current() - 1); e.preventDefault(); } });
+  let t; track.addEventListener('scroll', () => { clearTimeout(t); t = setTimeout(() => { counter.textContent = (current() + 1) + ' / ' + slides.length; }, 80); });
+  const links = [...document.querySelectorAll('.menu a')], secs = links.map(a => document.querySelector(a.getAttribute('href')));
+  const spy = new IntersectionObserver((es) => { es.forEach(en => { if (en.isIntersecting) { links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + en.target.id)); } }); }, { rootMargin: '-45% 0px -50% 0px' });
+  secs.forEach(s => s && spy.observe(s));
 }
 </script>
 </body>
